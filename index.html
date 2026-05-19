@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>ONUR | Tam Sayfa 3D Mimari</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Mono:wght@400;700&display=swap');
+
+    :root{
+      --depth: 68.8vw;
+      --angle: 0deg;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    body{
+      background:#000;
+      color:#fff;
+      font-family:'Inter',sans-serif;
+      overflow-x:hidden;
+    }
+
+    header{
+      position:fixed; top:0; left:0; width:100%;
+      padding:20px 40px;
+      display:flex; align-items:center; justify-content:space-between;
+      z-index:100;
+      font-family:'Space Mono',monospace;
+      font-size:12px; letter-spacing:1px;
+      mix-blend-mode:difference;
+    }
+    .header-left{ color:#888; }
+    .header-center{ font-weight:700; color:#fff; font-size:16px; }
+    .header-right a{ color:#fff; text-decoration:none; margin-left:20px; }
+
+    .hero{
+      position:relative;
+      height:100vh; width:100vw;
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden; background:#000;
+    }
+    #canvas{ position:absolute; inset:0; width:100%; height:100%; z-index:1; }
+    .tr-clock{
+      position:absolute; top:25%; right:20%;
+      font-family:'Space Mono',monospace; font-size:14px; line-height:1.5;
+      color:#aaa; z-index:2; pointer-events:none;
+    }
+    .tr-clock span{ color:#fff; font-weight:700; }
+
+    .hero-actions{ position:absolute; bottom:15%; left:10%; z-index:2; }
+    .cta-button{
+      display:inline-block;
+      background:#fff; color:#000;
+      padding:20px 40px;
+      font-size:24px; font-weight:700;
+      text-decoration:none;
+      transition:all .3s ease;
+    }
+    .cta-button:hover{ background:#ccc; transform:scale(.98); }
+    .cta-subtext{
+      font-family:'Space Mono',monospace;
+      font-size:12px; color:#888; margin-top:10px;
+    }
+    .scroll-indicator{
+      position:absolute; bottom:3%; width:100%;
+      text-align:center;
+      font-family:'Space Mono',monospace;
+      font-size:11px; color:#555; letter-spacing:3px;
+      z-index:2;
+      animation:pulse 2s infinite;
+    }
+    @keyframes pulse{ 0%,100%{opacity:.3} 50%{opacity:1} }
+
+    .fullpage-scroll-section{
+      position:relative;
+      height:650vh;
+      background:#000;
+    }
+    .sticky-viewport{
+      position:sticky; top:0; left:0;
+      width:100vw; height:100vh;
+      overflow:hidden;
+      perspective:2500px;
+      background:#050505;
+    }
+
+    .fullscreen-cube{
+      width:100vw; height:100vh;
+      position:absolute;
+      transform-style:preserve-3d;
+      transform: translateZ(calc(-1 * var(--depth))) rotateY(var(--angle));
+      will-change: transform;
+    }
+
+    .full-face{
+      position:absolute; top:0; left:0;
+      width:100vw; height:100vh;
+      background:#080808;
+      padding:12vw 10vw;
+      display:flex; align-items:center; justify-content:space-between;
+      overflow:hidden; /* diğer yüzler için kalsın */
+      border:1px solid #1a1a1a;
+    }
+
+    .puzzle-overlay{
+      position:absolute; inset:0;
+      pointer-events:none; z-index:1; opacity:.6;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1920 1080'%3E%3Cpath d='M600,0 L600,350 A40,40 0 1,1 600,450 L600,1080 M1300,0 L1300,600 A40,40 0 1,0 1300,700 L1300,1080 M0,360 L450,360 A40,40 0 1,0 550,360 L1920,360' fill='none' stroke='rgba(255, 255, 255, 0.05)' stroke-width='3'/%3E%3C/svg%3E");
+    }
+
+    .face-1{ transform: rotateY(0deg) translateZ(var(--depth)); }
+    .face-2{ transform: rotateY(72deg) translateZ(var(--depth)); }
+    .face-3{ transform: rotateY(144deg) translateZ(var(--depth)); }
+    .face-4{ transform: rotateY(216deg) translateZ(var(--depth)); }
+    .face-5{ transform: rotateY(288deg) translateZ(var(--depth)); }
+
+    .face-content-container{
+      display:flex; width:100%; height:100%;
+      align-items:center; justify-content:space-between;
+      z-index:2; position:relative;
+    }
+    .face-content-container.reverse{ flex-direction:row-reverse; }
+
+    .info-block{ max-width:35vw; }
+    .info-block .tag{
+      font-family:'Space Mono',monospace;
+      color:#666; font-size:14px; margin-bottom:15px;
+    }
+    .info-block h2{
+      font-size:4.5vw; font-weight:900;
+      letter-spacing:-2px; margin-bottom:20px;
+      line-height:1;
+    }
+    .info-block h4{
+      font-family:'Space Mono',monospace;
+      color:#ff5500; font-size:1.2vw;
+      margin-bottom:30px;
+    }
+    .info-block p{
+      color:#aaa; font-size:1.1vw; line-height:1.8;
+    }
+
+    .puzzle-img-box{
+      width:25vw; height:35vw;
+      background:#111;
+      border:1px solid #333;
+      position:relative;
+      background-size:cover;
+      background-position:center;
+      filter:grayscale(10%);
+      box-shadow:0 20px 50px rgba(0,0,0,.8);
+    }
+    .puzzle-img-box::after{
+      content:'';
+      position:absolute; top:45%; right:-2vw;
+      width:4vw; height:4vw;
+      background:#080808;
+      border:1px solid #333;
+      border-radius:50%;
+      border-left:none;
+    }
+    #pic-onur{ background-image:url('onur.png'); }
+    #pic-ilker{ background-image:url('ilker.png'); }
+    #pic-volkan{ background-image:url('volkan.png'); }
+    #pic-sude{ background-image:url('sude.png'); }
+
+    /* FACE-5 (MENÜ) */
+    .full-face.face-5{
+      overflow-y:auto;               /* FIX: mobilde içerik kesilmesin */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .face-5-layout{
+      display:flex; width:100%; height:100%;
+      align-items:flex-start; justify-content:flex-start;
+      gap:4vw;
+      z-index:2; position:relative;
+      padding-top:5vh;
+    }
+
+    .sidebar-menu-area{
+      display:flex; flex-direction:column;
+      width: clamp(260px, 28vw, 420px);
+      min-width: 240px;
+      position:relative;
+      z-index:2;
+    }
+    .project-brand{
+      font-family:'Space Mono',monospace;
+      font-size: clamp(18px, 2.5vw, 34px);
+      font-weight:700;
+      color:#fff;
+      margin-bottom:4.5vh;
+      letter-spacing:-2px;
+      border-left:5px solid #ff5500;
+      padding-left:20px;
+      line-height:1.1;
+    }
+    .menu-header-tag{
+      font-family:'Space Mono',monospace;
+      color:#666; font-size:12px;
+      margin-bottom:15px;
+    }
+
+    .basement-list{
+      list-style:none;
+      display:flex; flex-direction:column;
+      gap:8px;
+      max-height: 52vh;
+      overflow-y:auto;
+      padding-right:10px;
+    }
+    .basement-list::-webkit-scrollbar{ width:6px; }
+    .basement-list::-webkit-scrollbar-thumb{ background:#222; border-radius:8px; }
+    .basement-list::-webkit-scrollbar-track{ background:#060606; }
+
+    .menu-btn{
+      font-family:'Space Mono',monospace;
+      font-size: clamp(12px, 1.05vw, 16px);
+      color:#888;
+      padding:12px 14px;
+      border:1px solid #222;
+      cursor:pointer;
+      transition: all .3s cubic-bezier(0.16,1,0.3,1);
+      background:#030303;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      white-space: normal;
+      line-height:1.2;
+      user-select:none;
+    }
+    .menu-btn:hover, .menu-btn.active{
+      color:#fff;
+      border-color:#fff;
+      background:#111;
+      transform:translateX(14px);
+    }
+
+    .menu-btn .hover-tr{
+      margin-left:auto;
+      color:#ff5500;
+      font-weight:700;
+      opacity:0;
+      transform:translateX(-6px);
+      transition:all .2s ease;
+      font-size: clamp(10px, .9vw, 14px);
+      letter-spacing:1px;
+    }
+    .menu-btn:hover .hover-tr,
+    .menu-btn.active .hover-tr{
+      opacity:1;
+      transform:translateX(0);
+    }
+
+    .menu-btn.sub{
+      padding-left:34px;
+      font-size: clamp(11px, .95vw, 15px);
+      color:#777;
+      background:#020202;
+      border-color:#1b1b1b;
+    }
+    .menu-btn.sub:hover, .menu-btn.sub.active{ color:#fff; }
+
+    .dynamic-menu-content-area{
+      flex:1;
+      height:70vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding-left: 1vw;
+      position:relative;  /* FIX: z-index çalışsın */
+      z-index:2;
+      min-width: 0;
+    }
+    .dynamic-menu-content-area .content-title{
+      font-family:'Space Mono',monospace;
+      font-size: clamp(18px, 2.2vw, 34px);
+      font-weight:700;
+      color:#ff5500;
+      margin-bottom:14px;
+      line-height:1.15;
+      letter-spacing:-.5px;
+    }
+    .dynamic-menu-content-area .content-text{
+      color:#aaa;
+      font-size: clamp(13px, 1.05vw, 18px);
+      line-height:1.8;
+      max-width: 68ch;
+    }
+
+    .content-preview{
+      margin-top:22px;
+      border:1px solid #222;
+      background: rgba(10,10,10,.55);
+      padding:12px;
+      width: min(46vw, 820px);
+      cursor:pointer;
+    }
+    .content-preview img{
+      width:100%;
+      height:300px;
+      object-fit:cover;
+      display:block;
+      border:1px solid #1a1a1a;
+      background:#050505;
+    }
+    .preview-hint{
+      margin-top:10px;
+      font-family:'Space Mono',monospace;
+      font-size:11px;
+      letter-spacing:2px;
+      color:#666;
+    }
+
+    .image-modal{
+      position:fixed; inset:0;
+      display:none;
+      z-index:9999;
+    }
+    .image-modal.open{ display:block; }
+    .image-modal .backdrop{
+      position:absolute; inset:0;
+      background:rgba(0,0,0,.75);
+    }
+    .image-modal .panel{
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:min(92vw, 980px);
+      background:#070707;
+      border:1px solid #222;
+      box-shadow:0 30px 90px rgba(0,0,0,.7);
+      padding:18px;
+    }
+    .image-modal .panel h3{
+      font-family:'Space Mono',monospace;
+      font-size:14px;
+      letter-spacing:3px;
+      color:#888;
+      margin-bottom:12px;
+    }
+    .image-modal .panel img{
+      width:100%;
+      max-height:72vh;
+      object-fit:contain;
+      background:#000;
+      border:1px solid #1a1a1a;
+    }
+    .modal-close{
+      position:absolute;
+      top:10px; right:12px;
+      border:1px solid #333;
+      background:#0b0b0b;
+      color:#fff;
+      width:38px; height:38px;
+      cursor:pointer;
+      font-size:18px;
+    }
+
+    @media(max-width: 1024px){
+      header{ padding:16px 18px; }
+      .tr-clock{ right:8%; top:20%; }
+
+      .full-face{
+        padding: 14vh 6vw;
+        flex-direction:column;
+        justify-content:center;
+        gap:26px;
+        text-align:center;
+      }
+      .face-content-container, .face-content-container.reverse{
+        flex-direction:column;
+        justify-content:center;
+      }
+      .info-block{ max-width: 92vw; }
+      .info-block h2{ font-size: 8vw; }
+      .info-block h4{ font-size: 3.2vw; }
+      .info-block p{ font-size: 2.8vw; }
+      .puzzle-img-box{ width: 52vw; height: 62vw; }
+      .puzzle-img-box::after{ display:none; }
+
+      /* FACE-5 mobil düzen */
+      .face-5-layout{
+        flex-direction:column;
+        gap:18px;
+        padding-top:0;
+        align-items:center;
+        height:auto;
+      }
+
+      /* FIX: Mobilde içerik görünür olsun -> önce içerik, sonra menü */
+      .dynamic-menu-content-area{
+        order:-1;
+        height:auto;
+        padding-left:0;
+        width:92vw;
+      }
+      .sidebar-menu-area{
+        order:1;
+        width: 92vw;
+      }
+
+      .project-brand{ margin-bottom: 2vh; }
+      .basement-list{ max-height: 34vh; }
+      .content-preview{ width: 100%; }
+      .content-preview img{ height: 200px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-left">ISTANBUL, TR</div>
+    <div class="header-center">DHLA@Agnp Projesi</div>
+    <div class="header-right"><a href="#3dSection">TAM SAYFA 3D ↓</a></div>
+  </header>
+
+  <section class="hero">
+    <canvas id="canvas"></canvas>
+    <div class="tr-clock" id="trClock">YÜKLENİYOR...</div>
+
+    <div class="hero-actions">
+      <a href="#3dSection" class="cta-button">Akalın Ai</a>
+      <div class="cta-subtext">Yapay Zeka Destekli Gelecek</div>
+    </div>
+    <div class="scroll-indicator">AŞAĞI KAYDIRIN // TAM SAYFA DÖNÜŞ</div>
+  </section>
+
+  <section class="fullpage-scroll-section" id="3dSection">
+    <div class="sticky-viewport">
+      <div class="fullscreen-cube" id="fullCube">
+
+        <div class="full-face face-1">
+          <div class="puzzle-overlay"></div>
+          <div class="face-content-container">
+            <div class="info-block">
+              <div class="tag">[01-N INTRODUCTION]</div>
+              <h2>Onur Akalın</h2>
+              <h4>Proje Geliştiricisi & Kurucu</h4>
+              <p>Yapay zeka algoritmaları ve modern arayüz sistemlerinin puzzle blokları gibi birbirine kenetlendiği tam sayfa 3D uzay mimarisi.</p>
+            </div>
+            <div class="puzzle-img-box" id="pic-onur"></div>
+          </div>
+        </div>
+
+        <div class="full-face face-2">
+          <div class="puzzle-overlay"></div>
+          <div class="face-content-container reverse">
+            <div class="info-block">
+              <div class="tag">[02-N ADVISOR]</div>
+              <h2>Prof. Dr. İlker Avan</h2>
+              <h4>Danışman Hoca</h4>
+              <p>Projenin teorik altyapısını, algoritmik doğruluğunu ve bilimsel optimizasyonlarını denetleyen akademik danışmanımız.</p>
+            </div>
+            <div class="puzzle-img-box" id="pic-ilker"></div>
+          </div>
+        </div>
+
+        <div class="full-face face-3">
+          <div class="puzzle-overlay"></div>
+          <div class="face-content-container">
+            <div class="info-block">
+              <div class="tag">[03-N TEAM]</div>
+              <h2>Volkan Mustafa Akbulut</h2>
+              <h4>Geliştirme Ekibi</h4>
+              <p>Projenin geliştirme süreçlerinde yazılım, yapı ve sistem akışlarına destek veren ekip üyesi.</p>
+            </div>
+            <div class="puzzle-img-box" id="pic-volkan"></div>
+          </div>
+        </div>
+
+        <div class="full-face face-4">
+          <div class="puzzle-overlay"></div>
+          <div class="face-content-container reverse">
+            <div class="info-block">
+              <div class="tag">[04-N TEAM]</div>
+              <h2>Sude Zevrek</h2>
+              <h4>Geliştirme Ekibi</h4>
+              <p>Analiz, içerik ve süreç takibi tarafında proje çıktılarının düzenli ve tutarlı ilerlemesine katkı sağlar.</p>
+            </div>
+            <div class="puzzle-img-box" id="pic-sude"></div>
+          </div>
+        </div>
+
+        <div class="full-face face-5">
+          <div class="puzzle-overlay"></div>
+
+          <div class="face-5-layout">
+            <div class="sidebar-menu-area">
+              <div class="project-brand">Projenin ismi:<br>DHLA@Agnp</div>
+              <div class="menu-header-tag">↳ MODÜLLER (Üstüne Gel / Tıkla)</div>
+
+              <ul class="basement-list" id="moduleMenu">
+                <li class="menu-btn active"
+                    data-title="Abstract"
+                    data-description="Bu bölüm, çalışmanın genel özetini ve temel hedeflerini içerir.">
+                  Abstract
+                </li>
+
+                <li class="menu-btn"
+                    data-title="Highlights"
+                    data-description="Çalışmanın öne çıkan bulguları ve kısa çıkarımlar."
+                    title="Öne Çıkanlar">
+                  Highlights <span class="hover-tr">ÖNE ÇIKANLAR</span>
+                </li>
+
+                <li class="menu-btn"
+                    data-title="DHLA@Ag Synthesis"
+                    data-description="Sentez adımları, koşullar ve örnek hazırlama akışı."
+                    data-img="dhla@ag.png">
+                  DHLA@Ag Synthesis
+                </li>
+
+                <li class="menu-btn"
+                    data-title="IR"
+                    data-description="IR spektrumları ve yorumlar."
+                    data-img="ir.png">
+                  IR
+                </li>
+
+                <li class="menu-btn"
+                    data-title="SAM"
+                    data-description="SAM analizleri ve yüzey/morfoloji değerlendirmeleri."
+                    data-img="sam.png">
+                  SAM
+                </li>
+
+                <li class="menu-btn"
+                    data-title="EDX"
+                    data-description="Elementel kompozisyon ve dağılım analizi."
+                    data-img="edx.png">
+                  EDX
+                </li>
+
+                <li class="menu-btn"
+                    data-title="Catalytic Activity Reaction"
+                    data-description="Reaksiyon koşulları ve katalitik performans çıktıları."
+                    data-img="reaction.png">
+                  Catalytic Activity Reaction
+                </li>
+
+                <li class="menu-btn"
+                    data-title="Experiment"
+                    data-description="Deney düzeneği, prosedür ve ölçüm akışı.">
+                  Experiment
+                </li>
+
+                <li class="menu-btn"
+                    data-title="UV"
+                    data-description="UV-Vis ölçümleri, absorbans değişimleri ve değerlendirme."
+                    data-img="uv.png">
+                  UV
+                </li>
+
+                <li class="menu-btn"
+                    data-title="Conclusion"
+                    data-description="Sonuçlar, kısa tartışma ve gelecek çalışmalar.">
+                  Conclusion
+                </li>
+
+                <li class="menu-btn sub"
+                    data-title="Reference"
+                    data-description="Kaynakça ve literatür referansları.">
+                  Reference
+                </li>
+              </ul>
+            </div>
+
+            <div class="dynamic-menu-content-area">
+              <h3 id="menuContentTitle" class="content-title"></h3>
+              <p id="menuContentText" class="content-text"></p>
+
+              <div class="content-preview" id="contentPreview" style="display:none;">
+                <img id="contentImg" alt="">
+                <div class="preview-hint">GÖRSELİ AÇMAK İÇİN TIKLA</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="image-modal" id="imageModal">
+    <div class="backdrop" id="modalBackdrop"></div>
+    <div class="panel">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h3 id="modalTitle">PREVIEW</h3>
+      <img id="modalImg" alt="">
+    </div>
+  </div>
+
+  <script>
+    /* CLOCK */
+    function updateClock(){
+      const clockEl = document.getElementById('trClock');
+      if(!clockEl) return;
+      const options = { timeZone:'Europe/Istanbul', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false };
+      const dateOptions = { timeZone:'Europe/Istanbul', month:'short', day:'numeric', year:'numeric' };
+      const now = new Date();
+      const timeStr = new Intl.DateTimeFormat('tr-TR', options).format(now);
+      const dateStr = new Intl.DateTimeFormat('en-US', dateOptions).format(now).toUpperCase();
+      clockEl.innerHTML = `${dateStr}<br><span>ISTANBUL</span><br>${timeStr}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    /* 5 FACE ROTATION */
+    const scrollSection = document.getElementById('3dSection');
+    const fullCube = document.getElementById('fullCube');
+    let currentAngle = 0;
+    let targetAngle = 0;
+
+    const keys = [
+      { p: 0.00, a:   0 },
+      { p: 0.16, a:   0 },
+      { p: 0.26, a: -72 },
+      { p: 0.42, a: -72 },
+      { p: 0.52, a: -144 },
+      { p: 0.68, a: -144 },
+      { p: 0.78, a: -216 },
+      { p: 0.92, a: -216 },
+      { p: 0.99, a: -288 },
+      { p: 1.00, a: -288 }
+    ];
+
+    function lerp(a,b,t){ return a + (b-a)*t; }
+    function angleFromProgress(progress){
+      for(let i=0;i<keys.length-1;i++){
+        const k1 = keys[i], k2 = keys[i+1];
+        if(progress >= k1.p && progress <= k2.p){
+          const span = (k2.p - k1.p) || 1;
+          const t = (progress - k1.p) / span;
+          return lerp(k1.a, k2.a, t);
+        }
+      }
+      return keys[keys.length-1].a;
+    }
+
+    function handleScrollRotation(){
+      const rect = scrollSection.getBoundingClientRect();
+      const scrollableDist = rect.height - window.innerHeight;
+      const scrolled = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / (scrollableDist || 1)));
+      targetAngle = angleFromProgress(progress);
+    }
+
+    function animateFullRotation(){
+      currentAngle += (targetAngle - currentAngle) * 0.08;
+      fullCube.style.setProperty('--angle', `${currentAngle}deg`);
+      requestAnimationFrame(animateFullRotation);
+    }
+
+    window.addEventListener('scroll', handleScrollRotation, { passive:true });
+    handleScrollRotation();
+    animateFullRotation();
+
+    /* MENU + MODAL */
+    (function(){
+      const menu = document.getElementById('moduleMenu');
+      if(!menu) return;
+
+      const titleEl = document.getElementById('menuContentTitle');
+      const textEl  = document.getElementById('menuContentText');
+
+      const previewWrap = document.getElementById('contentPreview');
+      const previewImg  = document.getElementById('contentImg');
+
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImg');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalClose = document.getElementById('modalClose');
+      const modalBackdrop = document.getElementById('modalBackdrop');
+
+      let currentImgSrc = null;
+
+      function setActive(btn){
+        menu.querySelectorAll('.menu-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const t = btn.getAttribute('data-title') || btn.textContent.trim();
+        const d = btn.getAttribute('data-description') || '';
+        const img = btn.getAttribute('data-img');
+
+        titleEl.textContent = t;
+        textEl.textContent  = d;
+
+        currentImgSrc = img || null;
+
+        if(img){
+          previewImg.src = img;
+          previewImg.alt = t;
+          previewWrap.style.display = 'block';
+        }else{
+          previewWrap.style.display = 'none';
+          previewImg.src = '';
+          previewImg.alt = '';
+        }
+      }
+
+      function openModal(){
+        if(!currentImgSrc) return;
+        modal.classList.add('open');
+        modalImg.src = currentImgSrc;
+        modalTitle.textContent = (titleEl.textContent || 'PREVIEW').toUpperCase();
+      }
+      function closeModal(){
+        modal.classList.remove('open');
+        modalImg.src = '';
+      }
+
+      menu.querySelectorAll('.menu-btn').forEach(btn=>{
+        btn.addEventListener('pointerenter', ()=> setActive(btn));
+        btn.addEventListener('click', ()=>{
+          setActive(btn);
+          if(btn.getAttribute('data-img')) openModal();
+        });
+        btn.addEventListener('touchstart', ()=>{
+          setActive(btn);
+        }, { passive:true });
+      });
+
+      previewWrap.addEventListener('click', openModal);
+      modalClose.addEventListener('click', closeModal);
+      modalBackdrop.addEventListener('click', closeModal);
+      window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+      const first = menu.querySelector('.menu-btn.active') || menu.querySelector('.menu-btn');
+      if(first) setActive(first);
+    })();
+
+    /* CANVAS PARTICLES */
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    let particleArray = [];
+    const mouse = { x: null, y: null, radius: 120 };
+
+    window.addEventListener('mousemove', (e)=>{ mouse.x = e.x; mouse.y = e.y; }, { passive:true });
+    window.addEventListener('mouseout', ()=>{ mouse.x = undefined; mouse.y = undefined; }, { passive:true });
+
+    function setupCanvas(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    }
+
+    class Particle{
+      constructor(x,y){
+        this.x=x; this.y=y;
+        this.size=3;
+        this.baseX=x; this.baseY=y;
+        this.density=(Math.random()*30)+5;
+      }
+      draw(){
+        ctx.fillStyle='#fff';
+        ctx.fillRect(this.x,this.y,this.size,this.size);
+      }
+      update(){
+        if(mouse.x === undefined || mouse.y === undefined){
+          if(this.x !== this.baseX) this.x -= (this.x - this.baseX)/10;
+          if(this.y !== this.baseY) this.y -= (this.y - this.baseY)/10;
+          return;
+        }
+
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx*dx + dy*dy) || 0.0001;
+
+        let force = (mouse.radius - distance) / mouse.radius;
+        let dirX = (dx / distance) * force * this.density;
+        let dirY = (dy / distance) * force * this.density;
+
+        if(distance < mouse.radius){
+          this.x -= dirX * 3;
+          this.y -= dirY * 3;
+        }else{
+          if(this.x !== this.baseX) this.x -= (this.x - this.baseX)/10;
+          if(this.y !== this.baseY) this.y -= (this.y - this.baseY)/10;
+        }
+      }
+    }
+
+    function initParticles(){
+      particleArray = [];
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      const fontSize = Math.min(canvas.width * 0.25, 300);
+      ctx.font = `900 ${fontSize}px Inter, sans-serif`;
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillStyle='#fff';
+      ctx.fillText('ONUR', canvas.width/2, canvas.height/2);
+
+      const data = ctx.getImageData(0,0,canvas.width,canvas.height);
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      for(let y=0; y<data.height; y+=4){
+        for(let x=0; x<data.width; x+=4){
+          const alpha = data.data[(y*4*data.width) + (x*4) + 3];
+          if(alpha > 128) particleArray.push(new Particle(x,y));
+        }
+      }
+    }
+
+    function animateCanvas(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<particleArray.length;i++){
+        particleArray[i].update();
+        particleArray[i].draw();
+      }
+      requestAnimationFrame(animateCanvas);
+    }
+
+    setupCanvas();
+    animateCanvas();
+    window.addEventListener('resize', setupCanvas);
+  </script>
+</body>
+</html>
