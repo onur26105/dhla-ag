@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Akalın AI 2026</title>
+<style>
+/* ═══════════════════════════════════════════════════
+   AKALIN AI 2026 — ULTRA BLACK PROFESSIONAL DESIGN
+   ═══════════════════════════════════════════════════ */
+:root{
+  --b0:#000;--b1:#080808;--b2:#0e0e0e;--b3:#141414;--b4:#1a1a1a;--b5:#222;
+  --w:rgba(255,255,255,1);--wd:rgba(255,255,255,.78);--wm:rgba(255,255,255,.42);
+  --wg:rgba(255,255,255,.08);--wg2:rgba(255,255,255,.04);--wg3:rgba(255,255,255,.02);
+  --br:rgba(255,255,255,.07);--brl:rgba(255,255,255,.14);--brf:rgba(255,255,255,.32);
+  --r:14px;--rs:8px;--rx:5px;
+  --font:-apple-system,'SF Pro Display','Helvetica Neue',Arial,sans-serif;
+  --mono:'SF Mono','Fira Code','Courier New',monospace;
+  --tr:all .22s cubic-bezier(.4,0,.2,1);
+  --shadow:0 12px 60px rgba(0,0,0,.95);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--b0);color:var(--w);font-family:var(--font);-webkit-font-smoothing:antialiased}
+
+/* ── SPLASH ───────────────────────────────── */
+#splash{
+  position:fixed;inset:0;background:var(--b0);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9999;transition:opacity .9s ease,visibility .9s
+}
+#splash.out{opacity:0;visibility:hidden}
+.s-noise{position:absolute;inset:0;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events:none}
+.s-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 20%,transparent 100%);
+  pointer-events:none}
+.s-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.055);animation:ringP 4s ease-in-out infinite}
+.s-ring:nth-child(3){width:200px;height:200px}
+.s-ring:nth-child(4){width:300px;height:300px;animation-delay:.7s}
+.s-ring:nth-child(5){width:420px;height:420px;animation-delay:1.4s}
+.s-ring:nth-child(6){width:560px;height:560px;animation-delay:2.1s}
+@keyframes ringP{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.85;transform:scale(1.02)}}
+.s-logo{position:relative;z-index:1;width:76px;height:76px;border-radius:22px;
+  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);
+  display:flex;align-items:center;justify-content:center;font-size:2.2rem;
+  margin-bottom:2rem;animation:lgP 3s ease-in-out infinite;backdrop-filter:blur(10px)}
+@keyframes lgP{0%,100%{box-shadow:0 0 25px rgba(255,255,255,.04)}50%{box-shadow:0 0 50px rgba(255,255,255,.12)}}
+.s-brand{position:relative;z-index:1;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;
+  letter-spacing:-.04em;color:var(--w);text-align:center;line-height:1;
+  opacity:0;animation:fadeU .8s ease .3s forwards}
+.s-brand span{font-weight:300;color:var(--wm)}
+.s-year{position:relative;z-index:1;font-size:.72rem;letter-spacing:.4em;color:var(--wm);
+  margin-top:.55rem;text-transform:uppercase;opacity:0;animation:fadeU .8s ease .65s forwards}
+.s-div{position:relative;z-index:1;width:1px;height:0;background:rgba(255,255,255,.14);
+  margin:1.8rem auto;animation:divG .6s ease .95s forwards}
+@keyframes divG{to{height:44px}}
+.s-sub{position:relative;z-index:1;font-size:.88rem;color:var(--wm);
+  text-align:center;letter-spacing:.02em;opacity:0;animation:fadeU .8s ease 1.25s forwards}
+.s-btn{position:relative;z-index:1;margin-top:2.4rem;padding:.78rem 2.8rem;
+  border-radius:50px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.055);
+  color:var(--wd);font-family:var(--font);font-size:.9rem;font-weight:500;letter-spacing:.04em;
+  cursor:pointer;transition:var(--tr);opacity:0;animation:fadeU .8s ease 1.7s forwards;
+  backdrop-filter:blur(12px)}
+.s-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.38);
+  color:var(--w);transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,.05)}
+@keyframes fadeU{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── APP ────────────────────────────────────── */
+#app{display:flex;flex-direction:column;height:100vh;height:100dvh;opacity:0;transition:opacity .7s ease .1s}
+#app.on{opacity:1}
+
+/* ── HEADER ─────────────────────────────────── */
+header{display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.5rem;height:56px;background:rgba(0,0,0,.96);
+  border-bottom:1px solid var(--br);flex-shrink:0;
+  backdrop-filter:blur(30px);position:relative;z-index:10}
+.h-brand{display:flex;align-items:center;gap:.65rem}
+.h-logo{width:31px;height:31px;border-radius:9px;background:var(--wg2);
+  border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;
+  justify-content:center;font-size:.95rem;flex-shrink:0}
+.h-name{font-size:.92rem;font-weight:700;letter-spacing:-.01em;color:var(--w);line-height:1.2}
+.h-name small{font-size:.62rem;font-weight:400;color:var(--wm);letter-spacing:.05em;display:block}
+.h-acts{display:flex;align-items:center;gap:.45rem}
+.h-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45);
+  animation:breathe 2.5s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.45}50%{opacity:1;box-shadow:0 0 7px rgba(255,255,255,.45)}}
+.h-btn{padding:.35rem .85rem;border-radius:var(--rx);border:1px solid var(--br);
+  background:var(--wg2);color:var(--wm);font-family:var(--font);font-size:.73rem;
+  font-weight:500;cursor:pointer;letter-spacing:.02em;transition:var(--tr)}
+.h-btn:hover{border-color:var(--brl);color:var(--wd);background:var(--wg)}
+.h-btn.red:hover{border-color:rgba(255,70,70,.35);color:rgba(255,110,110,.85);background:rgba(255,50,50,.06)}
+
+/* ── CHAT ───────────────────────────────────── */
+#chat{flex:1;overflow-y:auto;padding:1.4rem 1rem;display:flex;flex-direction:column;gap:.95rem;scroll-behavior:smooth}
+#chat::-webkit-scrollbar{width:3px}
+#chat::-webkit-scrollbar-track{background:transparent}
+#chat::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
+
+/* ── MESSAGES ───────────────────────────────── */
+.mrow{display:flex;max-width:800px;margin:0 auto;width:100%;
+  animation:mIn .28s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes mIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.mrow.user{justify-content:flex-end}
+.mrow.bot{justify-content:flex-start}
+.mav{width:29px;height:29px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:.82rem;flex-shrink:0;margin-top:3px}
+.mrow.bot .mav{background:var(--wg2);border:1px solid var(--brl);margin-right:.5rem}
+.mrow.user .mav{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);
+  margin-left:.5rem;order:1}
+.mcon{display:flex;flex-direction:column;gap:.22rem;max-width:min(660px,86vw)}
+.mrow.user .mcon{align-items:flex-end}
+.mbbl{padding:.78rem .95rem;border-radius:var(--r);font-size:.865rem;line-height:1.68;word-break:break-word}
+.mrow.user .mbbl{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--r) var(--r) 3px var(--r);color:var(--wd)}
+.mrow.bot .mbbl{background:var(--wg3);border:1px solid var(--br);
+  border-radius:3px var(--r) var(--r) var(--r);color:rgba(255,255,255,.82);backdrop-filter:blur(12px)}
+.mtime{font-size:.61rem;color:rgba(255,255,255,.2);padding:0 .15rem}
+.mbbl h4{font-size:.83rem;font-weight:600;color:var(--w);margin:.8rem 0 .28rem;letter-spacing:.01em}
+.mbbl h4:first-child{margin-top:0}
+.mbbl p{margin:.28rem 0}
+.mbbl ul,.mbbl ol{padding-left:1.1rem;margin:.32rem 0}
+.mbbl li{margin:.2rem 0}
+.mbbl strong{color:rgba(255,255,255,.95);font-weight:600}
+.mbbl em{color:rgba(255,255,255,.6);font-style:italic}
+.mbbl code{background:rgba(255,255,255,.07);color:rgba(255,255,255,.85);
+  padding:.1em .38em;border-radius:4px;font-family:var(--mono);font-size:.8em;
+  border:1px solid rgba(255,255,255,.07)}
+.fb{background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.07);
+  border-left:2px solid rgba(255,255,255,.22);border-radius:var(--rs);
+  padding:.65rem .95rem;margin:.55rem 0;font-family:var(--mono);font-size:.78rem;
+  color:rgba(255,255,255,.6);line-height:1.75;white-space:pre-wrap}
+.tg{display:inline-block;padding:.16em .5em;border-radius:4px;font-size:.65rem;
+  font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.04);
+  color:rgba(255,255,255,.4);margin:0 .18rem 0 0}
+
+/* ── TYPING ─────────────────────────────────── */
+.typ-row{display:flex;align-items:flex-start;max-width:800px;margin:0 auto;width:100%;animation:mIn .22s ease both}
+.typ-av{width:29px;height:29px;border-radius:8px;background:var(--wg2);border:1px solid var(--brl);
+  display:flex;align-items:center;justify-content:center;font-size:.82rem;flex-shrink:0;margin-right:.5rem;margin-top:3px}
+.typ-bbl{background:var(--wg3);border:1px solid var(--br);
+  border-radius:3px var(--r) var(--r) var(--r);padding:.8rem 1rem;
+  display:flex;align-items:center;gap:5px}
+.td{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.32);
+  animation:tdB 1.3s ease-in-out infinite}
+.td:nth-child(2){animation-delay:.2s}.td:nth-child(3){animation-delay:.4s}
+@keyframes tdB{0%,80%,100%{transform:translateY(0);opacity:.32}40%{transform:translateY(-6px);opacity:.9}}
+
+/* ── INPUT ──────────────────────────────────── */
+#inp-area{padding:.75rem 1rem .95rem;background:rgba(0,0,0,.97);
+  border-top:1px solid var(--br);flex-shrink:0;backdrop-filter:blur(30px)}
+.chips{display:flex;flex-wrap:wrap;gap:.3rem;max-width:800px;margin:0 auto .55rem}
+.chip{padding:.25rem .68rem;border-radius:50px;border:1px solid var(--br);background:var(--wg2);
+  color:var(--wm);font-size:.7rem;font-family:var(--font);cursor:pointer;transition:var(--tr);
+  white-space:nowrap;letter-spacing:.01em}
+.chip:hover{border-color:rgba(255,255,255,.22);color:var(--wd);background:var(--wg);transform:translateY(-1px)}
+.iw{display:flex;align-items:flex-end;gap:.55rem;max-width:800px;margin:0 auto;
+  background:var(--wg2);border:1px solid var(--br);border-radius:13px;
+  padding:.5rem .5rem .5rem .95rem;transition:var(--tr)}
+.iw:focus-within{border-color:var(--brf);box-shadow:0 0 0 3px rgba(255,255,255,.04);background:var(--wg)}
+#ui{flex:1;background:transparent;border:none;outline:none;color:var(--w);
+  font-family:var(--font);font-size:.86rem;resize:none;max-height:108px;min-height:21px;line-height:1.5;padding:2px 0}
+#ui::placeholder{color:rgba(255,255,255,.2)}
+#sb{width:35px;height:35px;border-radius:9px;border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.09);color:var(--wd);font-size:.95rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:var(--tr)}
+#sb:hover{background:rgba(255,255,255,.16);color:var(--w);transform:scale(1.05)}
+#sb:disabled{opacity:.22;cursor:not-allowed;transform:none}
+.hint{text-align:center;font-size:.61rem;color:rgba(255,255,255,.14);margin-top:.42rem;letter-spacing:.02em}
+
+/* ── ADMIN ──────────────────────────────────── */
+#aov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);
+  backdrop-filter:blur(14px);z-index:500;align-items:center;justify-content:center}
+#aov.open{display:flex}
+.ap{background:var(--b2);border:1px solid rgba(255,255,255,.1);border-radius:18px;
+  width:min(880px,96vw);max-height:84vh;display:flex;flex-direction:column;
+  box-shadow:var(--shadow);overflow:hidden}
+.aph{padding:.95rem 1.35rem;border-bottom:1px solid var(--br);
+  display:flex;align-items:center;justify-content:space-between}
+.aph h2{font-size:.9rem;font-weight:700;color:var(--wd);letter-spacing:.03em}
+.apcl{background:none;border:none;color:rgba(255,255,255,.3);font-size:1.2rem;cursor:pointer;
+  padding:.18rem .45rem;border-radius:5px;transition:var(--tr)}
+.apcl:hover{color:rgba(255,70,70,.8);background:rgba(255,50,50,.06)}
+.aptb{padding:.65rem 1.15rem;border-bottom:1px solid var(--br);display:flex;gap:.55rem;flex-wrap:wrap}
+.aps{flex:1;min-width:155px;padding:.42rem .82rem;background:var(--wg2);border:1px solid var(--br);
+  border-radius:var(--rs);color:var(--wd);font-family:var(--font);font-size:.8rem;outline:none;transition:var(--tr)}
+.aps:focus{border-color:var(--brl)}.aps::placeholder{color:rgba(255,255,255,.2)}
+.apsl{padding:.42rem .82rem;background:var(--wg2);border:1px solid var(--br);
+  border-radius:var(--rs);color:rgba(255,255,255,.4);font-family:var(--font);font-size:.76rem;outline:none;cursor:pointer}
+option{background:#111}
+.apab{padding:.42rem .85rem;border-radius:var(--rs);border:1px solid var(--br);
+  background:var(--wg2);color:rgba(255,255,255,.4);font-size:.73rem;font-family:var(--font);
+  cursor:pointer;transition:var(--tr)}
+.apab:hover{border-color:var(--brl);color:var(--wd)}
+.apab.ex:hover{border-color:rgba(100,220,100,.3);color:rgba(130,220,130,.8)}
+.apst{padding:.48rem 1.15rem;display:flex;gap:1.1rem;border-bottom:1px solid var(--br);flex-wrap:wrap}
+.apst span{font-size:.7rem;color:rgba(255,255,255,.3)}.apst strong{color:rgba(255,255,255,.65)}
+.apbd{flex:1;overflow-y:auto;padding:.65rem 1.15rem}
+.apbd::-webkit-scrollbar{width:3px}
+.apbd::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
+.lc{background:var(--wg2);border:1px solid var(--br);border-radius:var(--rs);
+  padding:.8rem;margin-bottom:.5rem;transition:var(--tr)}
+.lc:hover{border-color:rgba(255,255,255,.1);background:var(--wg)}
+.lm{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin-bottom:.42rem}
+.lid{font-size:.63rem;color:rgba(255,255,255,.2);font-family:var(--mono)}
+.lt{font-size:.65rem;color:rgba(255,255,255,.25)}
+.lq{font-size:.78rem;color:var(--wd);margin-bottom:.32rem;font-weight:500}
+.lq::before{content:"S: ";color:rgba(255,255,255,.5);font-weight:600}
+.la{font-size:.73rem;color:rgba(255,255,255,.3);line-height:1.5;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.la::before{content:"C: ";color:rgba(255,255,255,.35);font-weight:600}
+.aempty{text-align:center;padding:2.5rem 1rem;color:rgba(255,255,255,.2);font-size:.82rem}
+
+@media(max-width:520px){.chips{display:none};header{padding:0 1rem}}
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND AUDIO -->
+<audio id="bg-audio" src="1.mp3" loop preload="auto"></audio>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="s-noise"></div>
+  <div class="s-grid"></div>
+  <div class="s-ring"></div>
+  <div class="s-ring"></div>
+  <div class="s-ring"></div>
+  <div class="s-ring"></div>
+  <div class="s-logo">◆</div>
+  <div class="s-brand">Akalın AI <span>2026</span></div>
+  <div class="s-year">Neural Intelligence · Istanbul</div>
+  <div class="s-div"></div>
+  <div class="s-sub">DHLA@AgNP Nanoteknoloji Asistanı</div>
+  <button class="s-btn" onclick="enterApp()">Başla →</button>
+</div>
+
+<!-- ADMIN -->
+<div id="aov">
+  <div class="ap">
+    <div class="aph">
+      <h2>◇ Admin Panel — Konuşma Kayıtları</h2>
+      <button class="apcl" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="aptb">
+      <input id="aps" class="aps" placeholder="Soru veya cevap ara..." oninput="renderAdmin()"/>
+      <select id="apc" class="apsl" onchange="renderAdmin()">
+        <option value="">Tüm Kategoriler</option>
+        <option value="DHLA">DHLA@AgNP</option>
+        <option value="KİNETİK">Kinetik</option>
+        <option value="UV-VIS">UV-Vis</option>
+        <option value="FTIR">FTIR</option>
+        <option value="ZETA">Zeta</option>
+        <option value="MEKANİZMA">Mekanizma</option>
+        <option value="GENEL">Genel</option>
+        <option value="GÜVENLİK">Güvenlik</option>
+      </select>
+      <button class="apab ex" onclick="exportCSV()">⬇ CSV</button>
+      <button class="apab" onclick="clearLogs()">🗑 Sil</button>
+    </div>
+    <div class="apst" id="apst"></div>
+    <div class="apbd" id="apbd"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header>
+    <div class="h-brand">
+      <div class="h-logo">◆</div>
+      <div>
+        <div class="h-name">Akalın AI 2026<small>DHLA@AgNP Nanoteknoloji Asistanı · AkalınSoft</small></div>
+      </div>
+    </div>
+    <div class="h-acts">
+      <div class="h-dot" title="Çevrimiçi"></div>
+      <button class="h-btn" id="mute-btn" onclick="toggleMute()" title="Müziği Aç/Kapat">♪ Müzik</button>
+      <button class="h-btn" onclick="clearChat()">Temizle</button>
+      <button class="h-btn" onclick="openAdmin()">Admin</button>
+    </div>
+  </header>
+
+  <div id="chat"></div>
+
+  <div id="inp-area">
+    <div class="chips">
+      <span class="chip" onclick="cc('DHLA@AgNP sistemi nedir?')">◆ Sistem Nedir?</span>
+      <span class="chip" onclick="cc('Kataliz mekanizması nasıl işler?')">Kataliz Mekanizması</span>
+      <span class="chip" onclick="cc('NaBH4 yerine ne kullanabiliriz?')">NaBH4 Alternatifleri</span>
+      <span class="chip" onclick="cc('Nanopartikül ne işe yarar?')">Nanopartikül</span>
+      <span class="chip" onclick="cc('IR spektrum analizi nasıl yapılır?')">IR / FTIR</span>
+      <span class="chip" onclick="cc('UV-Vis 400 nm piki neyi gösterir?')">UV-Vis</span>
+      <span class="chip" onclick="cc('Kinetik nasıl hesaplanır?')">Kinetik</span>
+      <span class="chip" onclick="cc('Zeta potansiyel nedir?')">Zeta</span>
+      <span class="chip" onclick="cc('Hangi yapay zeka dilisin?')">◆ Kimim?</span>
+    </div>
+    <div class="iw">
+      <textarea id="ui" placeholder="Sorunuzu yazın..." rows="1" onkeydown="hk(event)" oninput="ar(this)"></textarea>
+      <button id="sb" onclick="send()">➤</button>
+    </div>
+    <div class="hint">Enter → Gönder &nbsp;·&nbsp; Shift+Enter → Yeni satır</div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════
+//  AKALIN AI 2026  ·  AkalınSoft  ·  Neural Intelligence Engine v3
+//  Kural 1: Eksik/kısaltılmış terim tamamlama
+//  Kural 2: Çok dilli eşleşme (TR/EN/DE/FR)
+//  Kural 3: Cevap-içi terim algılama → ek açıklama
+//  Kural 4: Fuzzy + bağlamsal eşleşme
+// ══════════════════════════════════════════════════════════════════════════
+
+// ────────────────────────────────────────────────────────────────────────
+//  KURAL 1+2: ULTRA KAPSAMLI EŞANLAMLI & KISALTMA SÖZLÜĞÜ
+// ────────────────────────────────────────────────────────────────────────
+const TERM_MAP = {
+  // ══ ANALİTİK TEKNİKLER ══
+  // UV-Vis ve varyantları
+  'uv':'uv-vis', 'uv ':' uv-vis ', ' uv ':' uv-vis ', 'uv-visible':'uv-vis',
+  'uvvis':'uv-vis', 'uv vis':'uv-vis', 'ultraviolet':'uv-vis',
+  'ultraviole':'uv-vis', 'ultraviyole':'uv-vis', 'ultraviyolet':'uv-vis',
+  'visible spectroscopy':'uv-vis', 'visible spektroskopi':'uv-vis',
+  'elektronik spektrum':'uv-vis', 'elektronik spektroskopi':'uv-vis',
+  'absorbans spektroskopi':'uv-vis', 'absorbans ölçümü':'uv-vis',
+  'spektrofotometri':'uv-vis', 'spektrofotometre':'uv-vis',
+  'colorimetry':'uv-vis', 'kolorimetri':'uv-vis',
+  'uv spektrum':'uv-vis spektrum', 'uv analiz':'uv-vis analiz',
+  'uv piki':'uv-vis piki', 'uv grafiği':'uv-vis grafiği',
+  'absorption spectroscopy':'uv-vis',
+
+  // IR / FTIR ve tüm varyantları
+  'ir':'ftir', 'ır':'ftir', ' ir ':' ftir ', ' ır ':' ftir ',
+  'i.r.':'ftir', 'i.r':'ftir', 'ı.r.':'ftir',
+  'ir spektrum':'ftir spektrum', 'ır spektrum':'ftir spektrum',
+  'ir analiz':'ftir analiz', 'ır analiz':'ftir analiz',
+  'ir spektroskopi':'ftir spektroskopi', 'ır spektroskopi':'ftir spektroskopi',
+  'ir piki':'ftir piki', 'ır piki':'ftir piki',
+  'ir grafiği':'ftir grafiği', 'ır grafiği':'ftir grafiği',
+  'kızılötesi':'ftir', 'kizilotesi':'ftir', 'kızıl ötesi':'ftir',
+  'infrared':'ftir', 'infra-red':'ftir', 'infra red':'ftir',
+  'bağ titreşim':'ftir', 'bag titresim':'ftir',
+  'titreşim spektrum':'ftir', 'titresim spektrum':'ftir',
+  'vibration spectroscopy':'ftir', 'vibrational':'ftir',
+  'fourier transform':'ftir', 'fourier infrared':'ftir',
+  'mid-ir':'ftir', 'near-ir':'ftir', 'nir':'nir spektroskopi',
+  'absorbsiyon spektrum':'ftir', 'transmitans spektrum':'ftir',
+  'wavenumber':'ftir dalga sayısı', 'dalga sayısı':'ftir dalga sayısı',
+
+  // NMR
+  'nmr':'nmr spektroskopi', 'n.m.r.':'nmr spektroskopi',
+  'nükleer manyetik':'nmr spektroskopi', 'nuclear magnetic resonance':'nmr spektroskopi',
+  'proton nmr':'nmr spektroskopi', '1h nmr':'nmr spektroskopi',
+  '13c nmr':'nmr spektroskopi', 'karbon nmr':'nmr spektroskopi',
+  'hnmr':'nmr spektroskopi', 'h-nmr':'nmr spektroskopi',
+  'manyetik rezonans':'nmr spektroskopi',
+
+  // SEM
+  'sem':'sem analiz', 's.e.m.':'sem analiz',
+  'scanning electron':'sem analiz', 'taramalı elektron':'sem analiz',
+  'taramali elektron':'sem analiz', 'tarama elektron':'sem analiz',
+  'scanning electron microscopy':'sem analiz',
+  'scanning electron microscope':'sem analiz',
+
+  // TEM
+  'tem':'tem analiz', 't.e.m.':'tem analiz',
+  'transmission electron':'tem analiz', 'iletim elektron':'tem analiz',
+  'geçirimli elektron':'tem analiz', 'gecirimli elektron':'tem analiz',
+  'transmission electron microscopy':'tem analiz',
+  'transmission electron microscope':'tem analiz',
+
+  // XRD
+  'xrd':'xrd analiz', 'x-ray diffraction':'xrd analiz',
+  'x ışını kırınımı':'xrd analiz', 'x işını kırınımı':'xrd analiz',
+  'x-ışını kırınımı':'xrd analiz', 'difraksiyon':'xrd analiz',
+  'diffraction':'xrd analiz', 'powder xrd':'xrd analiz',
+  'pxrd':'xrd analiz', 'bragg':'xrd analiz',
+
+  // DSC
+  'dsc':'dsc analiz', 'd.s.c.':'dsc analiz',
+  'differential scanning calorimetry':'dsc analiz',
+  'diferansiyel taramalı kalorimetre':'dsc analiz',
+  'diferansiyel scanning':'dsc analiz',
+  'ısıl analiz':'dsc analiz', 'kalorimetri':'dsc analiz',
+  'calorimetry':'dsc analiz', 'kalorimetrik':'dsc analiz',
+
+  // TGA
+  'tga':'tga analiz', 't.g.a.':'tga analiz',
+  'termogravimetri':'tga analiz', 'termogravimetrik':'tga analiz',
+  'thermogravimetric':'tga analiz', 'thermogravimetry':'tga analiz',
+  'thermal gravimetric':'tga analiz',
+  'ısıl kütle kaybı':'tga analiz', 'kütce kaybi':'tga analiz',
+
+  // AFM
+  'afm':'afm analiz', 'a.f.m.':'afm analiz',
+  'atomic force microscopy':'afm analiz',
+  'atomik kuvvet mikroskobu':'afm analiz',
+  'atomik kuvvet':'afm analiz', 'atomic force':'afm analiz',
+  'taramalı prob':'afm analiz', 'probe microscopy':'afm analiz',
+
+  // DLS
+  'dls':'dls analiz', 'd.l.s.':'dls analiz',
+  'dynamic light scattering':'dls analiz',
+  'dinamik ışık saçılması':'dls analiz',
+  'dinamik isik sacilmasi':'dls analiz',
+  'particle size analyzer':'dls analiz',
+  'boyut dağılımı':'dls analiz',
+
+  // Raman
+  'raman':'raman spektroskopi',
+  'raman spektrum':'raman spektroskopi',
+  'raman analiz':'raman spektroskopi',
+  'raman piki':'raman spektroskopi',
+  'sers':'sers analiz', 'surface enhanced raman':'sers analiz',
+  'yüzey artırımlı raman':'sers analiz',
+
+  // XPS
+  'xps':'xps analiz', 'x.p.s.':'xps analiz',
+  'x-ray photoelectron':'xps analiz',
+  'fotoelektron spektroskopi':'xps analiz',
+  'esca':'xps analiz', 'electron spectroscopy':'xps analiz',
+  'yüzey analizi':'xps analiz',
+
+  // ICP
+  'icp':'icp analiz', 'icp-oes':'icp analiz', 'icp-ms':'icp analiz',
+  'inductively coupled plasma':'icp analiz',
+  'indüktif eşleşmiş plazma':'icp analiz',
+  'metal analizi':'icp analiz', 'eser metal analizi':'icp analiz',
+
+  // HPLC / LC-MS
+  'hplc':'hplc analiz', 'h.p.l.c.':'hplc analiz',
+  'high performance liquid chromatography':'hplc analiz',
+  'yüksek basınçlı sıvı kromatografisi':'hplc analiz',
+  'lc-ms':'hplc analiz', 'liquid chromatography':'hplc analiz',
+  'kromatografi':'hplc analiz', 'chromatography':'hplc analiz',
+
+  // GC
+  'gc':'gc analiz', 'gaz kromatografi':'gc analiz',
+  'gas chromatography':'gc analiz', 'gcms':'gc analiz',
+  'gc-ms':'gc analiz', 'gaz kromatografisi':'gc analiz',
+
+  // BET
+  'bet':'bet analiz', 'brunauer emmett teller':'bet analiz',
+  'yüzey alanı ölçümü':'bet analiz', 'n2 adsorpsiyon':'bet analiz',
+  'azot adsorpsiyon':'bet analiz',
+
+  // ══ KİMYASAL KAVRAMLAR (TR/EN) ══
+  'reaction':'reaksiyon', 'tepkime':'reaksiyon', 'kimyasal reaksiyon':'reaksiyon',
+  'adsorption':'adsorpsiyon', 'adsorbe':'adsorpsiyon',
+  'desorption':'desorpsiyon',
+  'catalysis':'kataliz', 'katalitik':'kataliz',
+  'catalyst':'katalizör', 'katalist':'katalizör',
+  'equilibrium':'denge', 'kimyasal denge':'denge',
+  'langmuir':'langmuir izoterm', 'langmuir isotherm':'langmuir izoterm',
+  'freundlich':'freundlich izoterm',
+  'kinetics':'kinetik', 'kinetik analiz':'kinetik',
+  'thermodynamics':'termodinamik',
+  'reduction':'indirgeme', 'redüksiyon':'indirgeme',
+  'oxidation':'oksidasyon', 'yükseltgenme':'oksidasyon',
+  'electron transfer':'elektron transferi',
+  'surface':'yüzey', 'surface area':'yüzey alanı',
+  'nanoparticle':'nanopartikül', 'nano particle':'nanopartikül',
+  'colloid':'kolloid', 'colloidal':'kolloidal',
+  'stability':'stabilite', 'kararlılık':'stabilite',
+  'aggregation':'agregasyon', 'flocculation':'agregasyon',
+  'zeta potential':'zeta potansiyel',
+  'ligand':'ligand', 'stabilizer':'stabilizatör',
+  'thiol':'tiyol', 'thiolate':'tiyolat',
+  'absorbance':'absorbans', 'absorption':'absorbans',
+  'wavelength':'dalga boyu', 'wavenumber':'dalga sayısı',
+  'peak':'pik', 'band':'bant',
+  'synthesis':'sentez', 'preparation':'hazırlama',
+  'characterization':'karakterizasyon',
+  'mechanism':'mekanizma', 'pathway':'yolak',
+  'rate constant':'hız sabiti',
+  'activation energy':'aktivasyon enerjisi',
+  'pseudo first order':'pseudo birinci derece',
+  'silver nanoparticle':'gümüş nanopartikül',
+  'silver np':'agnp', 'ag np':'agnp',
+  'gold nanoparticle':'altın nanopartikül',
+  'dihydrolipoic acid':'dhla',
+  'sodium borohydride':'nabh4',
+  'p-nitrophenol':'p-nitrofenol', 'para-nitrophenol':'p-nitrofenol',
+  'p-aminophenol':'p-aminofenol', 'para-aminophenol':'p-aminofenol',
+  'surface plasmon resonance':'lspr', 'spr':'lspr',
+  'localized surface plasmon':'lspr',
+  'dynamic light scattering':'dls',
+  'transmission electron microscopy':'tem analiz',
+  'x-ray diffraction':'xrd analiz',
+  'fourier transform infrared':'ftir',
+  'thermogravimetric analysis':'tga analiz',
+  'differential scanning calorimetry':'dsc analiz',
+  'atomic force microscopy':'afm analiz',
+
+  // ══ TÜRKÇE YAZIM VARYASYONLARI ══
+  'nano partikül':'nanopartikül', 'nano parçacık':'nanopartikül',
+  'nanoparçacık':'nanopartikül', 'nano malzeme':'nanopartikül',
+  'gumus':'gümüş', 'gümüs':'gümüş',
+  'kizilotesi':'kızılötesi',
+  'titresim':'titreşim',
+  'olcum':'ölçüm', 'analiz yöntemi':'karakterizasyon',
+  'pka':'pka değeri', 'ph':'ph değeri',
+};
+
+// ────────────────────────────────────────────────────────────────────────
+//  KURAL 3: CEVAP-İÇİ TERİM ALGILAMA — EK AÇIKLAMA BLOKLARI
+// ────────────────────────────────────────────────────────────────────────
+const TERM_EXTRAS = {
+  'nmr spektroskopi': {
+    label:'NMR Spektroskopisi Hakkında',
+    html:`<h4>◈ NMR Spektroskopisi</h4>
+<p><strong>Nükleer Manyetik Rezonans (NMR)</strong>, manyetik aktif çekirdeklerin (¹H, ¹³C, ¹⁵N vb.) güçlü manyetik alan altında radyo frekansı dalgalarıyla rezonansa girmesini inceler.</p>
+<div class="fb">Yaygın kullanım: Yapısal kimlik teyidi
+¹H NMR  : Proton ortamı ve bağ yapısı
+¹³C NMR : Karbon iskeleti
+2D NMR  : COSY, HSQC, HMBC — bağlantı haritası</div>
+<ul>
+<li>p-Aminofenol ¹H NMR: aromatik H ~6.5 ppm, NH₂ ~4–5 ppm, OH ~8–9 ppm</li>
+<li>Kimyasal kayma (δ, ppm) bağlanma ortamına özgüdür</li>
+<li>NMR tartışmasız moleküler kimlik verir — HPLC/LC-MS ile tamamlanır</li>
+</ul>`
+  },
+  'sem analiz': {
+    label:'SEM Analizi Hakkında',
+    html:`<h4>◈ SEM — Taramalı Elektron Mikroskobu</h4>
+<p>Odaklanmış elektron demeti örnek yüzeyini tarar; ikincil ve geri saçılmış elektronlardan görüntü oluşturur.</p>
+<div class="fb">Çözünürlük : ~1–5 nm
+Derinlik   : Yüksek alan derinliği → 3D görünüm
+EDX/EDS    : Eş zamanlı element analizi</div>
+<ul>
+<li>TEM'den farklı: yüzey morfolojisi görülür, çekirdek değil</li>
+<li>AgNP için: partikül şekli, dağılım, agregasyon durumu</li>
+<li>EDX ile: Ag, S (DHLA), C, O element haritası</li>
+</ul>`
+  },
+  'tem analiz': {
+    label:'TEM Analizi Hakkında',
+    html:`<h4>◈ TEM — İletim Elektron Mikroskobu</h4>
+<p>Yüksek enerjili elektron demeti numuneden geçer; absorbans farkından görüntü oluşturur. Atom çözünürlüğü mümkündür.</p>
+<div class="fb">Çözünürlük : 0.1–0.5 nm (HRTEM'de atom görünür)
+Numune     : İnce (< 100 nm) ince film
+SAED       : Seçilen alan elektron kırınımı → kristal yapı</div>
+<ul>
+<li>AgNP çekirdek çapı buradan ölçülür</li>
+<li>DHLA kabuğu genellikle TEM'de görülmez → DLS ile tamamla</li>
+<li>HRTEM ile fcc gümüş d-aralıkları görülebilir</li>
+</ul>`
+  },
+  'xrd analiz': {
+    label:'XRD Analizi Hakkında',
+    html:`<h4>◈ XRD — X-Işını Kırınımı</h4>
+<p>X-ışınları kristal düzlemlerinden Bragg koşuluna göre kırınır; faz kimliği ve kristalit boyutu belirlenir.</p>
+<div class="fb">Bragg Kanunu: nλ = 2d·sinθ
+Scherrer   : D = Kλ/(β·cosθ)
+AgNP pikleri: 38.1°, 44.3°, 64.4°, 77.4° (fcc)</div>
+<ul>
+<li>fcc gümüş → 4 karakteristik pik</li>
+<li>Pik genişlemesi → küçük kristalit boyutu</li>
+<li>Amorf hale → DHLA kaplaması veya oksit oluşumu</li>
+</ul>`
+  },
+  'dsc analiz': {
+    label:'DSC Analizi Hakkında',
+    html:`<h4>◈ DSC — Diferansiyel Taramalı Kalorimetri</h4>
+<p>Numune ile referans arasındaki ısı akışı farkını sıcaklığa karşı ölçer.</p>
+<div class="fb">Ölçülenler:
+  Erime noktası  (Tm) — endotermik pik
+  Camsı geçiş   (Tg) — ısı kapasitesi değişimi
+  Kristallenme  (Tc) — ekzotermik pik
+  Bozunma sıcaklığı</div>
+<ul>
+<li>DHLA'nın erime/bozunma sıcaklığını belirler</li>
+<li>Ligand bağlanmasının termal stabilitesini gösterir</li>
+<li>TGA ile birlikte kullanılır</li>
+</ul>`
+  },
+  'tga analiz': {
+    label:'TGA Analizi Hakkında',
+    html:`<h4>◈ TGA — Termogravimetrik Analiz</h4>
+<p>Numune kütlesinin sıcaklığa göre değişimi ölçülür. DHLA@AgNP için organik ligand yüklemesi belirlenir.</p>
+<div class="fb">25–150°C  : Nem/çözücü kaybı
+150–450°C : DHLA organik bozunması → yük %
+>500°C    : Metalik Ag kalıntısı</div>
+<ul>
+<li>DHLA ağırlık kaybı % = yüzey organik yüklemesi</li>
+<li>Yüksek yük → blokaj riski; düşük yük → kararsız kolloid</li>
+<li>TGA + FTIR kombinasyonu en güvenilir ligand analizi</li>
+</ul>`
+  },
+  'afm analiz': {
+    label:'AFM Analizi Hakkında',
+    html:`<h4>◈ AFM — Atomik Kuvvet Mikroskobu</h4>
+<p>Keskin uçlu prob yüzey üzerinde taranır; atomik ölçekte topografi ve kuvvet etkileşimleri ölçülür.</p>
+<div class="fb">Modlar:
+  Contact mode    : prob temas halinde
+  Tapping mode    : titreşimli → yumuşak numune
+  Non-contact     : uzak mesafe kuvvetleri
+Çözünürlük: ~1 nm yatay, 0.1 nm dikey</div>
+<ul>
+<li>Nanopartikül boyutu ve şekli (SEM/TEM alternatifi)</li>
+<li>DHLA ligand kalınlığı faz görüntüsü ile tahmin edilebilir</li>
+<li>Yüzey pürüzlülüğü ve agregasyon durumu</li>
+</ul>`
+  },
+  'dls analiz': {
+    label:'DLS Analizi Hakkında',
+    html:`<h4>◈ DLS — Dinamik Işık Saçılması</h4>
+<p>Kolloidal partiküllerin Brown hareketinden kaynaklanan ışık şiddetindeki dalgalanmalar analiz edilir; boyut ve dağılım hesaplanır.</p>
+<div class="fb">Stokes-Einstein: D = kT/(3πηd)
+D: difüzyon katsayısı → hidrodinamik çap (dₕ)
+PDI: polidispersite indeksi (< 0.2 iyi)</div>
+<ul>
+<li>TEM boyutundan büyük sonuç verir (ligand + solvasyon dahil)</li>
+<li>Agregasyon → PDI artışı + büyük boyut piki</li>
+<li>Z-average: hacim ağırlıklı ortalama çap</li>
+</ul>`
+  },
+  'raman spektroskopi': {
+    label:'Raman Spektroskopisi Hakkında',
+    html:`<h4>◈ Raman Spektroskopisi</h4>
+<p>Monokromatik lazer ışığının inelastik saçılması (Raman kayması) ölçülür; moleküler titreşimler karakterize edilir.</p>
+<div class="fb">Raman kayması (Δν, cm⁻¹):
+SERS güçlendirmesi: 10⁶–10¹⁰ kat (AgNP üzerinde)
+AgNP: Ag–S gerilmesi ~235 cm⁻¹
+Nitro grubu: ~1340 cm⁻¹
+Amino grubu: ~1600 cm⁻¹</div>
+<ul>
+<li>FTIR'ye tamamlayıcı: su bandı Raman'da zayıf → sulu sistemler için avantaj</li>
+<li>AgNP SERS etkisi ile çok düşük derişimde tespit</li>
+<li>Reaksiyon izleme: nitro→amino dönüşümü gerçek zamanlı</li>
+</ul>`
+  },
+  'xps analiz': {
+    label:'XPS Analizi Hakkında',
+    html:`<h4>◈ XPS — X-Işını Fotoelektron Spektroskopisi</h4>
+<p>X-ışınlarıyla koparılan fotoelektronların kinetik enerjisi ölçülerek bağlanma enerjisi hesaplanır.</p>
+<div class="fb">Ag 3d₅/₂ (metalik): ~368.0 eV
+S 2p (thiolat Ag–S): ~162.0 eV ← DHLA kanıtı
+S 2p (serbest tiyol): ~163.5 eV
+Analiz derinliği: ~5–10 nm (yüzey tekniği)</div>
+<ul>
+<li>Yüzey element kompozisyonu ve oksidasyon durumu</li>
+<li>DHLA bağlanmasının en güçlü kanıtı: S 2p ~162 eV</li>
+<li>Ag/S atomik oranı → kaplama yoğunluğu tahmini</li>
+</ul>`
+  },
+  'hplc analiz': {
+    label:'HPLC Analizi Hakkında',
+    html:`<h4>◈ HPLC — Yüksek Performanslı Sıvı Kromatografisi</h4>
+<p>Bileşenler kolona affiniteye göre ayrılır; dedektörle (UV, MS) tanımlanır.</p>
+<div class="fb">Faz türleri:
+  Ters faz (C18): hidrofobik etkileşim → en yaygın
+  Normal faz    : polar sabit faz
+Dedektörler:
+  UV/Vis: p-NP (315 nm), p-AP (237 nm)
+  MS    : m/z ile kesin kimlik</div>
+<ul>
+<li>p-Nitrofenol ve p-aminofenol ayrımı için ideal</li>
+<li>Seçicilik ve dönüşüm % hesabı için standart yöntem</li>
+<li>LC-MS kombinasyonu yan ürünleri de tespit eder</li>
+</ul>`
+  },
+  'icp analiz': {
+    label:'ICP Analizi Hakkında',
+    html:`<h4>◈ ICP-OES / ICP-MS</h4>
+<p>Argon plazmasında atomize edilen numuneden emisyon (OES) veya kütle (MS) analizi yapılır.</p>
+<div class="fb">ICP-OES: ppb–ppm hassasiyet, çok element
+ICP-MS : ppt hassasiyet, izotop analizi
+Ag için: 328.07 nm (OES) veya m/z=107,109 (MS)</div>
+<ul>
+<li>DHLA@AgNP: Ag sızıntısı (leaching) takibi</li>
+<li>Heterojen/homojen kataliz ayrımında kritik</li>
+<li>Tekrar kullanım döngülerinde Ag kaybı ölçümü</li>
+</ul>`
+  },
+  'gc analiz': {
+    label:'GC Analizi Hakkında',
+    html:`<h4>◈ GC — Gaz Kromatografisi</h4>
+<p>Uçucu bileşenler taşıyıcı gaz (He, N₂) ile kolonda ayrılır.</p>
+<div class="fb">Dedektörler: FID, TCD, MS (GC-MS)
+GC-MS: kesin kimlik + kantitasyon
+Kolon: polar (CP-Wax) veya apolar (DB-5)</div>
+<ul>
+<li>Uçucu organik bileşikler için idealdir</li>
+<li>p-NP ve p-AP uçuculuğu düşük → türevlendirme gerekebilir</li>
+<li>NaBH₄ bozunma ürünleri (H₂, boran) için kullanılabilir</li>
+</ul>`
+  },
+  'bet analiz': {
+    label:'BET Analizi Hakkında',
+    html:`<h4>◈ BET — Yüzey Alanı Analizi</h4>
+<p>N₂ gazı çok tabakalı adsorpsiyonu BET teorisiyle analiz edilir; özgül yüzey alanı ve gözenek boyutu hesaplanır.</p>
+<div class="fb">BET denklemi:
+1/[Q(P₀/P-1)] = (c-1)·P/(Qm·c·P₀) + 1/(Qm·c)
+S_BET: özgül yüzey alanı (m²/g)
+Tipik AgNP: 10–60 m²/g (boyuta bağlı)</div>
+<ul>
+<li>Destekli NP sistemlerinde destek yüzey alanı ölçülür</li>
+<li>Kolloidal AgNP için dolaylı yöntemler daha pratik</li>
+<li>TEM boyutundan hesaplanan teorik değerle karşılaştırma yapılır</li>
+</ul>`
+  },
+  'ftir': {
+    label:'FTIR Hakkında (Kısa Özet)',
+    html:`<h4>◈ FTIR Hızlı Özet</h4>
+<div class="fb">2560–2575 cm⁻¹: S–H (tiyol) ← DHLA bağlanma kanıtı
+1700–1720 cm⁻¹: C=O (karboksilat)
+2800–3000 cm⁻¹: C–H alifatik
+3200–3400 cm⁻¹: O–H, N–H (geniş)</div>
+<p>DHLA@AgNP'de S–H pikinin kaybolması = Ag–S bağı kanıtı.</p>`
+  },
+  'uv-vis': {
+    label:'UV-Vis Hızlı Özet',
+    html:`<h4>◈ UV-Vis Hızlı Özet</h4>
+<div class="fb">400 nm: p-nitrofenolat (izleme noktası)
+390–430 nm: AgNP LSPR bandı ⚠ çakışma!
+300 nm: p-aminofenol ürünü
+Beer-Lambert: A = ε·c·l</div>
+<p>400 nm azalması = substrat tükeniyor; ürün teyidi için HPLC gerekir.</p>`
+  },
+  'langmuir izoterm': {
+    label:'Langmuir İzotermi Hakkında',
+    html:`<h4>◈ Langmuir İzotermi</h4>
+<div class="fb">θ = K·C / (1 + K·C)
+θ: doluluk oranı | K: adsorpsiyon sabiti | C: derişim
+Doğrusal form: C/q = 1/(K·qm) + C/qm</div>
+<ul>
+<li>Homojen yüzey + tek tabakalı adsorpsiyon varsayar</li>
+<li>Langmuir-Hinshelwood kataliz modeline temel oluşturur</li>
+<li>Freundlich (heterojen yüzey) ile karşılaştır</li>
+</ul>`
+  },
+  'nmr spektroskopi_in_answer': {
+    label:'', html:''  // placeholder
+  }
+};
+
+// ────────────────────────────────────────────────────────────────────────
+//  ANA BİLGİ TABANI
+// ────────────────────────────────────────────────────────────────────────
+const KB = [
+// ══ KİMLİK ══
+{id:'kimlik',k:['kimsin','kim geliştirdi','kim yaptı','hangi yapay zeka','ne tür ai','hangi model','akalinsoft','akalınsoft','yapay zeka mısın','ai kimsin','yapay zeka dilsin','ai dilisin','model nedir','hangi ai','hangi yapay'],c:'GENEL',
+a:`<h4>Akalın AI 2026 — Kimlik</h4>
+<p>Ben <strong>Akalın AI 2026</strong> — <strong>AkalınSoft</strong> tarafından geliştirilmiş nanoteknoloji yapay zeka asistanıyım.</p>
+<div class="fb">Sistem      : Akalın AI 2026
+Geliştirici : AkalınSoft — Neural Intelligence
+Merkez      : Istanbul, Türkiye
+Sürüm       : 2026 Neural Release
+Eğitim      : onur.json bilgi tabanı + genişletilmiş bilim motoru
+Motor       : Ultra-fuzzy matching + cevap-içi terim genişletme</div>
+<h4>Yeteneklerim</h4>
+<ul>
+<li>DHLA@AgNP sentezi, karakterizasyonu, katalitik mekanizması</li>
+<li>UV-Vis, FTIR/IR, NMR, SEM, TEM, XRD, DSC, TGA, AFM, DLS, Raman, XPS, ICP, HPLC, GC, BET analiz yorumları</li>
+<li>Eksik/kısaltılmış terim tamamlama (uv→UV-Vis, ir→FTIR, nmr→NMR...)</li>
+<li>İngilizce-Türkçe-Almanca-Fransızca terim eşleştirme</li>
+<li>Cevap içindeki terimleri algılayıp ek açıklama yapma</li>
+<li>Kimya, fizik, biyoloji, mühendislik, malzeme bilimi kapsamı</li>
+</ul>
+<p style="margin-top:.6rem;font-size:.78em;color:rgba(255,255,255,.35)">AkalınSoft © 2026 · Tüm hakları saklıdır</p>`},
+
+{id:'selam',k:['merhaba','selam','hello','hi','hey','iyi günler','günaydın','iyi akşamlar','nasılsın','naber'],c:'GENEL',
+a:`◆ <strong>Akalın AI 2026'ya Hoşgeldiniz.</strong><br>Geliştirici: <strong>AkalınSoft</strong> · Neural Intelligence · Istanbul<br><br>DHLA@AgNP nanoteknoloji asistanıyım. UV-Vis, IR/FTIR, NMR, TEM, SEM, XRD, DLS, Raman, XPS, ICP, HPLC ve çok daha fazlasında yardımcı olabilirim.<br><br>Ne sormak istersiniz?`},
+
+// ══ SİSTEM ══
+{id:'sistem',k:['dhla@agnp nedir','sistem nedir','genel bilgi','sistem hakkında','hızlı özet','bir cümlede','ne nedir'],c:'DHLA',
+a:`<h4>DHLA@AgNP — Sistem Tanımı</h4>
+<p><strong>DHLA@AgNP</strong>, dihidrolipoik asit (DHLA) ile stabilize edilmiş gümüş nanopartiküllerdir.</p>
+<div class="fb">Çekirdek  : Ag nanopartikül (katalitik aktif merkez)
+Ligand    : DHLA — 2 tiyol grubu ile Ag'ye bağlanır
+Dış yüzey : –COO⁻ → suda dağılabilirlik
+Boyut     : 3–15 nm (tipik)
+LSPR      : ~390–430 nm</div>
+<h4>Tek Cümlede</h4>
+<p>DHLA@AgNP, p-nitrofenolun NaBH₄ eşliğinde p-aminofenole dönüşümünü yüzey-katalizli elektron/hidrit aktarımıyla hızlandıran kolloidal heterogen katalizördür.</p>
+<h4>Neden Önemli?</h4>
+<ul>
+<li>400 nm UV-Vis ile kolay izleme</li>
+<li>Kataliz etkisi renk değişimiyle görülür</li>
+<li>Metal NP benchmark standardı</li>
+<li>Hem kinetik hem mekanizma çalışması için ideal</li>
+</ul>`},
+
+// ══ DHLA ══
+{id:'dhla',k:['dhla','dihidrolipoik','dihydrolipoic','tiyol grubu','lipoik','dhla rolü','dhla kimyası','dhla yapısı'],c:'DHLA',
+a:`<h4>DHLA — Dihidrolipoik Asit</h4>
+<div class="fb">Ad      : Dihidrolipoik Asit (Dihydrolipoic Acid)
+Formül  : C₈H₁₄O₂S₂     M.A.: ~208.34 g/mol
+Yapı    : 2 tiyol (–SH) + 1 karboksilik asit (–COOH)
+Kaynak  : Lipoik asit + NaBH₄ → indirgeme</div>
+<h4>Ag Yüzeyine Bağlanma</h4>
+<div class="fb">Ag + 2HS–R–COOH → Ag–S–R–COOH + 2H⁺
+Monodentat: tek S | Bidentat: iki S (chelat etkisi → güçlü)</div>
+<h4>Üç Kritik Rolü</h4>
+<ul>
+<li><strong>Stabilizasyon:</strong> Elektrostatik + sterik çift mekanizma</li>
+<li><strong>Boyut kontrolü:</strong> Monodispers sentez</li>
+<li><strong>Yüzey kimyası:</strong> Elektron yoğunluğu ve aktif bölge erişimi</li>
+</ul>
+<h4>Bağlanma Kanıtları</h4>
+<ul>
+<li>XPS: S 2p ~162 eV (thiolat)</li>
+<li>FTIR: ~2560 cm⁻¹ S–H pikinin kaybolması</li>
+<li>DLS: hidrodinamik çap artışı | TGA: organik yük</li>
+</ul>`},
+
+// ══ AgNP ══
+{id:'agnp',k:['agnp','gümüş nanopartikül','gümüş nano','ag nanopartikül','neden gümüş','gümüş özellikleri','silver nano'],c:'DHLA',
+a:`<h4>AgNP — Gümüş Nanopartikül</h4>
+<div class="fb">Sembol : Ag  |  Atom ağırlığı: 107.87 g/mol
+Kristal: fcc (yüz merkezli kübik)
+Boyut  : 3–15 nm (DHLA@AgNP)
+LSPR   : ~390–430 nm</div>
+<h4>Neden Gümüş?</h4>
+<ul>
+<li>Au'ya göre çok daha ekonomik</li>
+<li>BH₄ bazlı sistemlerde yeterli aktivite</li>
+<li>UV-Vis ile LSPR bandı anlık izleme</li>
+<li>Kolay sentez</li>
+</ul>
+<h4>Boyut-Aktivite</h4>
+<div class="fb">6/(ρ·d) = özgül yüzey alanı
+d↓ → Yüzey↑ → Aktif yer↑ → kₐₚₚ↑
+⚠ çok küçük → agregasyon + ligand blokajı</div>
+<h4>Dezavantajlar</h4>
+<ul>
+<li>Au'dan kolay okside olur | Cl⁻/S²⁻ pasifleşme | Ekotoksisite</li>
+</ul>`},
+
+// ══ REAKSİYON ══
+{id:'reaksiyon',k:['reaksiyon','p-nitrofenol','p-aminofenol','nitrofenol','aminofenol','substrat','ürün','dönüşüm','model reaksiyon'],c:'DHLA',
+a:`<h4>p-Nitrofenol → p-Aminofenol Reaksiyonu</h4>
+<div class="fb">4-NP + 6e⁻ + 6H⁺ → 4-AP + 2H₂O
+M.A.(4-NP) = 139.11 g/mol  |  pKa ≈ 7.15
+M.A.(4-AP) = 109.13 g/mol</div>
+<h4>UV-Vis İzleme</h4>
+<ul>
+<li>~317 nm: p-nitrofenol (nötr)</li>
+<li>~400 nm: p-nitrofenolat (bazik, sarı) ← izleme</li>
+<li>~300 nm: p-aminofenol artışı</li>
+</ul>
+<h4>Önemi</h4>
+<ul>
+<li>p-NP: toksik çevre kirletici</li>
+<li>p-AP: parasetamol sentezinde ara ürün</li>
+<li>Model reaksiyon: kolay UV-Vis, net kataliz farkı</li>
+</ul>`},
+
+// ══ MEKANİZMA ══
+{id:'mekanizma',k:['mekanizma','nasıl çalışır','kataliz nasıl','adım adım','elektron transfer','adsorpsiyon','desorpsiyon','langmuir','eley rideal','ara ürün'],c:'MEKANİZMA',
+a:`<h4>Kataliz Mekanizması — 6 Adım</h4>
+<ol>
+<li><strong>Bazik ortam:</strong> NaBH₄ → pH↑ → p-NP → p-nitrofenolat (400 nm)</li>
+<li><strong>Adsorpsiyon:</strong> BH₄⁻ + p-nitrofenolat → Ag yüzeyine</li>
+<li><strong>Elektron/hidrit aktarımı:</strong> Metal yüzey köprüsü → Eₐ düşer</li>
+<li><strong>Ara ürün:</strong> p-Nitrosofenol → p-Hidroksilaminofenol</li>
+<li><strong>Tam indirgeme:</strong> → p-Aminofenol (–NH₂)</li>
+<li><strong>Desorpsiyon:</strong> Ürün ayrılır, katalizör döngüye girer</li>
+</ol>
+<div class="fb">Langmuir-Hinshelwood: her iki tür yüzeyde → reaksiyon
+Eley-Rideal:          biri yüzeyde + diğeri çözeltiden</div>
+<h4>Neden Katalizörsüz Yavaş?</h4>
+<p>Kinetik bariyer sorunu — termodinamik değil. BH₄⁻ ile nitro grubun doğrudan elektron transferi kinetik olarak elverişsizdir.</p>`},
+
+// ══ NaBH4 ══
+{id:'nabh4',k:['nabh4','sodyum borohidrür','borohidrür','bh4','hidrit','nabh4 rolü','nabh4 neden'],c:'DHLA',
+a:`<h4>NaBH₄ — Sistem İçindeki Rolü</h4>
+<div class="fb">1. Elektron/hidrit donörü: BH₄⁻ → 4H⁻
+2. Bazik ortam: BH₄⁻ + 2H₂O → BO₂⁻ + 4H₂
+3. Pseudo-birinci-derece koşul (aşırı fazlada)</div>
+<h4>Neden Standart?</h4>
+<ul>
+<li>Suda çalışır | Güçlü indirgen | 400 nm piki sağlar | Kinetik model kolaylaşır</li>
+</ul>
+<h4>Sınırlamalar</h4>
+<ul>
+<li>Hidroliz → taze hazırla | Borlu atık | Yüksek pH</li>
+</ul>
+<h4>Güvenlik</h4>
+<ul>
+<li>H₂ gazı → patlama riski | Bazik+korozif | Çeker ocak zorunlu</li>
+</ul>`},
+
+// ══ NaBH4 ALTERNATİFLERİ ══
+{id:'alt_indirgen',k:['nabh4 alternatif','nabh4 yerine','h2 gazı','amonyak boran','hidrazin','formik asit','askorbik asit','sodyum ditiyonit','elektrokimyasal','fotokataliz','yeşil indirgen'],c:'DHLA',
+a:`<h4>NaBH₄ Alternatifleri</h4>
+<div class="fb">İndirgen           Yeşillik  Güvenlik  Aktivite
+H₂ Gazı            ★★★★★    ★★★       Yüksek
+Amonyak Boran       ★★★★     ★★★★      İyi
+Formik Asit         ★★★★     ★★★       Orta
+Askorbik Asit       ★★★★★    ★★★★★     Düşük
+Sodyum Ditiyonit    ★★★      ★★★       Orta
+Hidrazin            ★        ★         Yüksek (TOKSİK)
+Elektrokimyasal     ★★★★★    ★★★★      Yüksek
+Fotokatalitik       ★★★      ★★★★      Değişken</div>
+<ul>
+<li><strong>H₂:</strong> Temiz, endüstriyel — basınç gerektirir</li>
+<li><strong>Elektrokimyasal:</strong> En temiz — elektrot düzeneği şart</li>
+<li><strong>Hidrazin:</strong> Güçlü ama çok toksik — son tercih</li>
+</ul>
+<p><em>Benchmark için NaBH₄ en pratik; gerçek uygulama için H₂ veya elektrokimyasal.</em></p>`},
+
+// ══ KİNETİK ══
+{id:'kinetik',k:['kinetik','kapp','pseudo birinci derece','hız sabiti','ln a','absorbans zamanla','reaksiyon hızı','indüksiyon','ton','tof','k mass','arrhenius','aktivasyon enerjisi kinetik'],c:'KİNETİK',
+a:`<h4>Katalitik Kinetik Analizi</h4>
+<div class="fb">Koşul  : [NaBH₄] >> [p-NP] → pseudo-birinci-derece
+Denklem: ln(Aₜ/A₀) = −kₐₚₚ · t
+k_mass = kₐₚₚ / kütle      [s⁻¹·g⁻¹]
+TOF    = mol/(mol_aktif·s)
+TON    = toplam mol/mol_aktif</div>
+<h4>Grafik</h4>
+<ul>
+<li>X: zaman (s) — Y: ln(Aₜ/A₀)</li>
+<li>Eğim = −kₐₚₚ | R² tek başına yeterli değil</li>
+</ul>
+<h4>İndüksiyon Periyodu</h4>
+<ul>
+<li>Yüzey oksit indirgenmesi | O₂ tüketimi | Ligand reorganizasyonu</li>
+</ul>
+<h4>Arrhenius</h4>
+<div class="fb">k = A·exp(−Eₐ/RT)
+ln(k) vs 1/T → eğim = −Eₐ/R</div>`},
+
+// ══ UV-VIS ══
+{id:'uvvis',k:['uv-vis','absorbans','400 nm','317 nm','spr','lspr','plazmon','renk değişimi','spektrofotometre','beer lambert','uv analiz','uv piki'],c:'UV-VIS',
+a:`<h4>UV-Vis Spektroskopisi</h4>
+<div class="fb">~317 nm    : p-Nitrofenol (nötr)
+~400 nm    : p-Nitrofenolat (bazik, sarı) ← izleme
+~300 nm    : p-Aminofenol ürünü
+~390–430nm : AgNP LSPR ⚠ blank şart!
+Beer-Lambert: A = ε·c·l
+Dönüşüm %: (1−Aₜ/A₀)×100</div>
+<h4>LSPR Boyut</h4>
+<ul>
+<li>5 nm→~390 nm | 20 nm→~405 nm | 50 nm→~425 nm</li>
+<li>DHLA kaplaması: +2–5 nm kayma</li>
+</ul>
+<h4>Kritik</h4>
+<p>400 nm sinyali yok ≠ tam dönüşüm. Ürün için HPLC/LC-MS zorunlu.</p>`},
+
+// ══ FTIR ══
+{id:'ftir',k:['ftir','kızılötesi','infrared','cm-1','dalga sayısı','s-h piki','c=o','tiyol piki','bağ titreşim','ftir analiz','ftir yorumu','2560','sh piki'],c:'FTIR',
+a:`<h4>FTIR Spektral Analizi</h4>
+<div class="fb">2560–2575 cm⁻¹ : S–H (tiyol) ← ★ EN KRİTİK ★ kaybolması = Ag–S bağı
+3200–3400 cm⁻¹ : O–H + N–H (geniş)
+2800–3000 cm⁻¹ : C–H alifatik (DHLA zinciri)
+1700–1720 cm⁻¹ : C=O (–COOH, DHLA karboksilat)
+1550–1620 cm⁻¹ : N–H bükülme (amin)
+700–800 cm⁻¹   : C–S gerilme (DHLA sülfür)</div>
+<h4>Kritik Yorum</h4>
+<p>Serbest DHLA'da güçlü S–H piki (~2560 cm⁻¹) görülür. <strong>DHLA@AgNP'de bu pikin kaybolması = Ag–S bağı kanıtıdır.</strong></p>
+<div class="fb">Serbest DHLA : güçlü S–H, güçlü C=O
+DHLA@AgNP   : S–H yok/zayıf, C=O hafif kayma</div>`},
+
+// ══ NMR ══
+{id:'nmr',k:['nmr spektroskopi','nmr nedir','nmr analiz','nükleer manyetik','1h nmr','13c nmr','proton nmr','karbon nmr','kimyasal kayma','chemical shift','ppm','h-nmr'],c:'ANALİZ',
+a:`<h4>NMR Spektroskopisi — Nükleer Manyetik Rezonans</h4>
+<p>Manyetik aktif çekirdeklerin (¹H, ¹³C, ¹⁵N, ³¹P...) güçlü manyetik alanda radyo frekansıyla rezonansa girmesi esasına dayanır.</p>
+<div class="fb">¹H NMR  : Proton ortamı ve sayısı → en yaygın
+¹³C NMR : Karbon iskeleti → yapısal doğrulama
+2D NMR  : COSY (H–H), HSQC (H–C), HMBC (uzun mesafe)
+Birim   : kimyasal kayma δ (ppm) — TMS referans (0 ppm)</div>
+<h4>DHLA@AgNP Bağlamında</h4>
+<ul>
+<li>p-Aminofenol ¹H NMR: aromatik H ~6.5 ppm, NH₂ ~4–5 ppm, OH ~8–9 ppm</li>
+<li>p-Nitrofenol ¹H NMR: aromatik H ~8.2 ppm (NO₂ etkisi)</li>
+<li>DHLA ¹H NMR: –SH ~1.5–2 ppm, –CH₂ ~1.5–2.5 ppm, –COOH ~11–12 ppm</li>
+</ul>
+<h4>Avantajları</h4>
+<ul>
+<li>Tartışmasız moleküler kimlik</li>
+<li>Yapısal elüsidasyon (2D NMR ile)</li>
+<li>Saf madde kantitasyonu (iç standart ile)</li>
+</ul>
+<h4>Dezavantajları</h4>
+<ul>
+<li>Pahalı ve yavaş (UV-Vis'e kıyasla)</li>
+<li>Yüksek numune konsantrasyonu gerekir</li>
+<li>Rutin kinetik takip için pratik değil</li>
+</ul>`},
+
+// ══ SEM ══
+{id:'sem',k:['sem analiz','taramalı elektron','scanning electron','taramali elektron','sem nedir','sem neden','sem yorumu'],c:'ANALİZ',
+a:`<h4>SEM — Taramalı Elektron Mikroskobu</h4>
+<p>Odaklanmış elektron demeti örnek yüzeyini tarar; ikincil elektronlardan (SE) yüzey görüntüsü, geri saçılmış elektronlardan (BSE) kompozisyon kontrastı elde edilir.</p>
+<div class="fb">Çözünürlük : 1–5 nm
+Derinlik   : Çok yüksek alan derinliği (3D görünüm)
+Vakum      : Yüksek vakum veya ESEM (çevre SEM)
+EDX/EDS    : Eş zamanlı element analizi</div>
+<h4>AgNP için SEM Kullanımı</h4>
+<ul>
+<li>Partikül morfolojisi ve şekli</li>
+<li>Dağılım ve agregasyon durumu</li>
+<li>EDX: Ag, S, C, O element haritası → DHLA varlığı</li>
+</ul>
+<h4>TEM ile Farkı</h4>
+<ul>
+<li>SEM: yüzey | TEM: iç yapı (çekirdek)</li>
+<li>SEM çözünürlüğü < TEM çözünürlüğü</li>
+<li>SEM: kolay numune hazırlama | TEM: ince film şart</li>
+</ul>`},
+
+// ══ XRD ══
+{id:'xrd',k:['xrd analiz','x-ray diffraction','kristal yapı','fcc gümüş','scherrer','kristalit boyutu','xrd nedir','difraksiyon','bragg'],c:'ANALİZ',
+a:`<h4>XRD — X-Işını Kırınımı</h4>
+<p>X-ışınları kristal düzlemlerinden Bragg koşuluna göre kırınır; faz kimliği ve kristalit boyutu hesaplanır.</p>
+<div class="fb">Bragg kanunu: nλ = 2d·sinθ
+Scherrer   : D = Kλ/(β·cosθ)  (K≈0.9)
+
+AgNP fcc pikleri:
+(111): 2θ ≈ 38.1°
+(200): 2θ ≈ 44.3°
+(220): 2θ ≈ 64.4°
+(311): 2θ ≈ 77.4°</div>
+<h4>Yorumlama</h4>
+<ul>
+<li>Dar pik → büyük kristalit | Geniş pik → küçük kristalit</li>
+<li>Amorf hale → NP çok küçük veya oksit oluşumu</li>
+<li>XRD boyutu ≠ TEM boyutu (TEM tüm partiküldür)</li>
+</ul>`},
+
+// ══ DSC ══
+{id:'dsc',k:['dsc analiz','differential scanning calorimetry','diferansiyel taramalı','kalorimetri','erime noktası','camsı geçiş','dsc nedir','termal analiz dsc'],c:'ANALİZ',
+a:`<h4>DSC — Diferansiyel Taramalı Kalorimetri</h4>
+<p>Numune ve referans arasındaki ısı akışı farkı sıcaklığa karşı ölçülür. Faz geçişleri, erime, kristallenme ve bozunma olayları belirlenir.</p>
+<div class="fb">Tm (erime)        : endotermik pik
+Tg (camsı geçiş)  : ısı kapasitesi değişimi
+Tc (kristallenme) : ekzotermik pik
+ΔHm (erime entalpisi): pik alanı</div>
+<h4>DHLA@AgNP Bağlamında</h4>
+<ul>
+<li>DHLA'nın erime/bozunma sıcaklığını belirler</li>
+<li>Ligand bağlanmasının termal etkisini gösterir</li>
+<li>NP kaplama öncesi ve sonrası DSC karşılaştırması → bağlanma kanıtı</li>
+</ul>
+<h4>TGA ile Birlikte Kullanım</h4>
+<p>DSC faz geçişlerini, TGA kütle kaybını ölçer. İkisi birlikte kapsamlı termal karakterizasyon sağlar.</p>`},
+
+// ══ TGA ══
+{id:'tga',k:['tga analiz','termogravimetri','thermogravimetric','organik yük','yükleme miktarı','dhla miktarı nasıl','tga nedir','kütle kaybı'],c:'ANALİZ',
+a:`<h4>TGA — Termogravimetrik Analiz</h4>
+<p>Sıcaklık artışıyla numune kütlesindeki değişim izlenir. DHLA@AgNP için organik ligand yüklemesi belirlenir.</p>
+<div class="fb">25–150°C   : Nem / çözücü kaybı
+150–450°C  : DHLA bozunması → organik yük %
+>500°C     : Metalik Ag kalıntısı
+
+Yük % = (m_başlangıç − m_kalıntı) / m_başlangıç × 100</div>
+<h4>Yorumlama</h4>
+<ul>
+<li>Yüksek organik yük → aktif yüzey blokajı riski</li>
+<li>Düşük organik yük → kararsız kolloid riski</li>
+<li>Optimum yük → stabilite + aktivite dengesi</li>
+</ul>`},
+
+// ══ AFM ══
+{id:'afm',k:['afm analiz','atomic force microscopy','atomik kuvvet','afm nedir','afm neden','prob mikroskobu','taramalı prob'],c:'ANALİZ',
+a:`<h4>AFM — Atomik Kuvvet Mikroskobu</h4>
+<p>Atom ölçeğinde keskin prob yüzeyi tarar; kuvvet-mesafe etkileşiminden topografi ve özellik haritası elde edilir.</p>
+<div class="fb">Modlar:
+  Contact mode  : prob temas → sert numune
+  Tapping mode  : titreşimli → yumuşak numune (NP için)
+  Non-contact   : uzak mesafe
+Çözünürlük: ~1 nm yatay | ~0.1 nm dikey</div>
+<h4>AgNP için AFM</h4>
+<ul>
+<li>Boyut ve şekil (TEM/SEM alternatifi)</li>
+<li>DHLA ligand kalınlığı faz görüntüsü ile</li>
+<li>Yüzey pürüzlülüğü ve partikül dağılımı</li>
+<li>Substrata immobilize NP'lerin görüntülenmesi</li>
+</ul>`},
+
+// ══ DLS ══
+{id:'dls',k:['dls analiz','dynamic light scattering','dinamik ışık saçılması','boyut ölçümü dls','pdi','monodispers','hidrodinamik çap','dls nedir'],c:'ANALİZ',
+a:`<h4>DLS — Dinamik Işık Saçılması</h4>
+<p>Brown hareketinden kaynaklanan ışık şiddetindeki dalgalanmalar analiz edilerek hidrodinamik çap ve boyut dağılımı hesaplanır.</p>
+<div class="fb">Stokes-Einstein: D = kT/(3πηdₕ)
+D: difüzyon katsayısı → dₕ: hidrodinamik çap
+PDI: polidispersite indeksi
+
+PDI < 0.1 : Mükemmel monodispers
+PDI < 0.2 : İyi (kabul edilebilir)
+PDI > 0.3 : Geniş / agregasyon şüphesi</div>
+<h4>TEM ile Farkı</h4>
+<ul>
+<li>DLS > TEM (ligand + solvasyon kabuğu dahil)</li>
+<li>Fark ΔR ≈ DHLA kalınlığı + hidrasyon</li>
+</ul>`},
+
+// ══ RAMAN ══
+{id:'raman',k:['raman spektroskopi','raman nedir','raman analiz','sers analiz','sers nedir','yüzey artırımlı raman','raman agnp'],c:'ANALİZ',
+a:`<h4>Raman / SERS Spektroskopisi</h4>
+<p>Lazer ışığının inelastik saçılması (Raman kayması) moleküler titreşimleri karakterize eder. AgNP üzerinde SERS etkisi ile sinyaller güçlenir.</p>
+<div class="fb">SERS güçlendirmesi : 10⁶–10¹⁰ kat (AgNP üzerinde)
+Ag–S gerilmesi     : ~235 cm⁻¹ (DHLA bağlanması)
+Nitro grubu (NO₂)  : ~1340 cm⁻¹
+Amino grubu (NH₂)  : ~1600 cm⁻¹
+C–H               : ~2900 cm⁻¹</div>
+<h4>DHLA@AgNP Sisteminde</h4>
+<ul>
+<li>DHLA bağlanması: Ag–S sinyali ~235 cm⁻¹</li>
+<li>Nitro→amino: NO₂ piki azalır, NH₂ piki artar → reaksiyon izleme</li>
+<li>Ara ürünler (nitroso, hidroksilamin) tespit edilebilir</li>
+</ul>
+<h4>FTIR'den Farkı</h4>
+<ul>
+<li>Raman: simetrik titreşimler güçlü, su bandı zayıf (sulu sistem avantajı)</li>
+<li>FTIR: asimetrik titreşimler güçlü, su engelleyici olabilir</li>
+</ul>`},
+
+// ══ ZETA ══
+{id:'zeta',k:['zeta','zeta potansiyel','kolloidal stabilite','yüzey yükü','dlvo','mv','agregasyon','kararlılık','stabilite'],c:'ZETA',
+a:`<h4>Zeta Potansiyel</h4>
+<div class="fb">|ζ| > 60 mV : Mükemmel | 40–60: İyi | 20–40: Orta | <20: Agregasyon!
+DHLA@AgNP tipik: −30 ila −50 mV
+Ölçüm: Smoluchowski → ζ = μₑ×η/ε</div>
+<h4>DHLA Stabilizasyon Mekanizması</h4>
+<ul>
+<li>Elektrostatik: –COO⁻ grupları → negatif yük → Coulomb itme</li>
+<li>Sterik: DHLA organik zinciri → fiziksel bariyer</li>
+</ul>
+<div class="fb">DLVO: V_top = V_elektrostatik + V_VdW
+Kararlı: V_e >> V_VdW</div>
+<p><em>Uyarı:</em> Daha negatif ζ ≠ daha iyi kataliz. Substrat adsorpsiyonu etkilenebilir.</p>`},
+
+// ══ KARAKTERİZASYON GENEL ══
+{id:'karakt',k:['karakterizasyon','xps','analiz yöntemi','nanopartikül analiz','boyut ölçümü','kristal faz','karakterize'],c:'ANALİZ',
+a:`<h4>DHLA@AgNP Karakterizasyon Seti</h4>
+<div class="fb">Zorunlu minimum:
+  TEM      : çekirdek boyut + şekil
+  DLS/PDI  : hidrodinamik çap + dağılım
+  Zeta     : kolloidal kararlılık (−30→−50 mV)
+  UV-Vis   : LSPR + kataliz takibi
+  FTIR/XPS : DHLA bağlanma kanıtı
+Önerilen:
+  XRD      : kristal faz (fcc Ag)
+  TGA      : organik yük %
+  ICP      : metal miktarı + leaching
+  HPLC     : ürün kimliği + seçicilik</div>
+<p>Her teknik farklı bilgi verir — birbirini tamamlar, yerini alamaz.</p>`},
+
+// ══ PERFORMANS ══
+{id:'performans',k:['performans faktör','hızı etkileyen','aktiviteyi etkileyen','boyut etkisi','ligand etkisi','ph etkisi','sıcaklık etkisi','iyonik güç','optimizasyon'],c:'DHLA',
+a:`<h4>Katalitik Performans Faktörleri</h4>
+<ul>
+<li><strong>Boyut:</strong> küçük → aktif yüzey↑ → hız↑. Aşırı küçük: agregasyon+blokaj</li>
+<li><strong>Şekil/Faset:</strong> köşe-kenar atomları reaktif → aktivite farkı</li>
+<li><strong>DHLA Yoğunluğu:</strong> az→kararsız; çok→blokaj. Optimum orta kaplama</li>
+<li><strong>pH:</strong> p-NP iyonizasyonu, DHLA yükü, BH₄⁻ kararlılığı</li>
+<li><strong>Sıcaklık:</strong> hız↑ ama BH₄⁻ hidrolizi+AgNP kararsızlığı↑</li>
+<li><strong>İyonik güç:</strong> yüksek tuz → Debye↓ → agregasyon riski</li>
+<li><strong>Cl⁻/S²⁻:</strong> AgCl/Ag₂S → yüzey pasifleşmesi</li>
+<li><strong>Işık:</strong> plazmonik foto katkı → standart kinetik için sabit tut</li>
+</ul>
+<h4>Altın Kural</h4>
+<p>En küçük ≠ en iyi. <strong>Aktif yüzey + kararlılık + ligand dengesi</strong> = optimum.</p>`},
+
+// ══ DENEY TASARIMI ══
+{id:'deney',k:['deney tasarım','protokol','a0 nasıl','kontrol deney','blank nasıl','prosedür','deney adımları'],c:'DHLA',
+a:`<h4>Deney Tasarımı</h4>
+<ol>
+<li>p-NP çözeltisi hazırla</li>
+<li>Aşırı NaBH₄ ekle → sarı renk (nitrofenolat)</li>
+<li>DHLA@AgNP ekle → <strong>hemen A₀ al</strong></li>
+<li>400 nm izle (zamana göre)</li>
+<li>ln(Aₜ/A₀) vs t → kₐₚₚ hesapla</li>
+</ol>
+<h4>Zorunlu Kontroller</h4>
+<ul>
+<li>p-NP + NaBH₄ (katalizörsüz) → çok yavaş</li>
+<li>p-NP + DHLA + NaBH₄ (Ag yok)</li>
+<li>p-NP + DHLA@AgNP (NaBH₄ yok)</li>
+<li>Filtrasyon sonrası süpernatant aktivitesi</li>
+<li>Tekrar kullanım testi (≥3 döngü)</li>
+<li>ICP: Ag sızıntısı</li>
+</ul>`},
+
+// ══ SORUN GİDERME ══
+{id:'sorun',k:['sorun','400 nm düşmüyor','aktif değil','pik kayıyor','lineer değil','aktivite düşüyor','neden çalışmıyor','troubleshoot'],c:'DHLA',
+a:`<h4>Sorun Giderme</h4>
+<h4>🔴 400 nm Düşmüyor</h4>
+<ul>
+<li>NaBH₄ bayat → taze hazırla | Katalizör az → artır</li>
+<li>DHLA aşırı → blokaj | AgNP agregasyon → DLS/TEM | Cl⁻/S²⁻ kirlilik</li>
+</ul>
+<h4>🟡 İndüksiyon Periyodu</h4>
+<ul>
+<li>Yüzey oksit → inert atmosfer | Ligand reorganizasyonu</li>
+</ul>
+<h4>🟡 Lineer Değil</h4>
+<ul>
+<li>NaBH₄ fazlalığı yetersiz → artır | Spektral girişim → blank düzelt</li>
+</ul>
+<h4>🔴 Aktivite Düşüyor</h4>
+<ul>
+<li>ICP: Ag sızıntısı | TEM+DLS: boyut değişimi | Yüzey kirlenmesi</li>
+</ul>`},
+
+// ══ GÜVENLİK ══
+{id:'guvenlik',k:['güvenlik','atık','toksik','risk','laboratuvar','eldiven','çeker ocak','tehlike'],c:'GÜVENLİK',
+a:`<h4>Güvenlik ve Atık Yönetimi</h4>
+<ul>
+<li><strong>p-Nitrofenol:</strong> Toksik, cilt/göz tahrişi, çevre zararlı</li>
+<li><strong>NaBH₄:</strong> Su/asitle H₂ → patlama; bazik+korozif; çeker ocak zorunlu</li>
+<li><strong>AgNP/Ag⁺:</strong> Ekotoksik → metal atık kabına</li>
+<li><strong>DHLA:</strong> Standart organik kimyasal önlemleri</li>
+</ul>
+<h4>Atık</h4>
+<ul>
+<li>Ag içeren → ağır metal atık kabı | Borohidrür → kontrollü quench | Lavaboya değil!</li>
+</ul>`},
+
+// ══ GENEL BİLİM (GENIŞ) ══
+{id:'np_yarar',k:['nanopartikül ne işe','nano ne işe','nano faydası','nanopartikül neden','nano avantaj','nm ölçek'],c:'GENEL',
+a:`<h4>Nanopartikül — Neden Önemli?</h4>
+<div class="fb">Boyut: 1–100 nm
+DNA çapı: ~2 nm | Bakteri: ~1000 nm | Saç teli: ~80,000 nm</div>
+<h4>Temel Üstünlükler</h4>
+<ul>
+<li><strong>Yüksek yüzey/hacim oranı:</strong> 10 nm→~60 m²/g (aktif merkez bolluğu)</li>
+<li><strong>Benzersiz optik:</strong> LSPR → renk ve güçlü absorbans</li>
+<li><strong>Kuantum etkisi:</strong> 10 nm altında elektronik yapı değişir</li>
+<li><strong>Programlanabilir:</strong> boyut+şekil+yüzey kimyası ile özellik ayarı</li>
+</ul>
+<h4>Kullanım Alanları</h4>
+<ul>
+<li>Kataliz | Tıp (ilaç taşıyıcı, biyosensör) | Elektronik | Enerji | SERS</li>
+</ul>`},
+
+{id:'sentez',k:['sentez','synthesis','hazırlama','agno3','gümüş nitrat','sentezleme','dhla@agnp hazırlama'],c:'DHLA',
+a:`<h4>DHLA@AgNP Sentezi</h4>
+<h4>Üç Yaklaşım</h4>
+<ol>
+<li>AgNP önce → sonra DHLA ligand değişimi</li>
+<li>AgNP, DHLA varlığında doğrudan sentez</li>
+<li>Başka stabilizörle AgNP → DHLA ile fonksiyonelleştirme</li>
+</ol>
+<div class="fb">Kritik parametreler:
+  AgNO₃ derişimi | DHLA/Ag mol oranı
+  NaBH₄ derişimi | pH: 7–9
+  Sıcaklık | O₂ varlığı</div>
+<h4>Renk Takibi</h4>
+<div class="fb">Renksiz (Ag⁺) → Sarı (5–15nm) → Turuncu (büyük) → Siyah (agregasyon)</div>`},
+
+{id:'alt_kat',k:['aunp','altın nanopartikül','pdnp','platin','cunp','bimetalik','destekli nanopartikül','alternatif katalizör'],c:'DHLA',
+a:`<h4>Alternatif Nanokatalizörler</h4>
+<div class="fb">Sistem  Maliyet  Stabilite  Aktivite
+AgNP     Orta     Orta       İyi      ← bu sistem
+AuNP     Yüksek   Çok iyi    İyi
+PdNP     Yüksek   İyi        Çok yük.
+PtNP     Çok yük. İyi        Yüksek
+CuNP     Düşük    Zayıf      Orta</div>
+<ul>
+<li>Bimetalik: Au-Ag, Ag-Pd → sinerji ile aktivite↑</li>
+<li>Destekli: SiO₂, TiO₂, Fe₃O₄ → geri kazanım↑</li>
+</ul>`},
+
+{id:'rapor',k:['raporlama','rapor','sunum','jüri sorusu','savunma','tez','makale'],c:'GENEL',
+a:`<h4>Profesyonel Raporlama</h4>
+<div class="fb">□ Ag kaynağı + DHLA/Ag mol oranı
+□ TEM boyutu + PDI + Zeta (mV)
+□ Metal derişimi + pH + sıcaklık
+□ UV-Vis blank yaklaşımı
+□ kₐₚₚ + R² + fit aralığı
+□ n ≥ 3 tekrar + hata çubukları
+□ Ürün teyit (HPLC/LC-MS)
+□ ICP leaching + tekrar kullanım</div>
+<h4>Juriye Güçlü Cümleler</h4>
+<ul>
+<li>"Kinetik bariyer Ag nanopartikül yüzeyinde aşılmaktadır."</li>
+<li>"Pseudo-birinci-derece yalnızca [NaBH₄]>>[p-NP] koşulunda geçerlidir."</li>
+<li>"kₐₚₚ değil, k_mass karşılaştırma için doğru metriktir."</li>
+</ul>`},
+
+{id:'ileri',k:['tuzak soru','ileri düzey','termodinamik yeterli','neden katalizör','en büyük k'],c:'DHLA',
+a:`<h4>İleri Düzey Sorular</h4>
+<ul>
+<li><strong>Termodinamik yeterliyse neden katalizör?</strong> Kinetik bariyer sorunu — Eₐ düşürülmesi gerekir.</li>
+<li><strong>400 nm kayboldu = tam dönüşüm?</strong> Hayır. HPLC zorunlu.</li>
+<li><strong>Daha negatif ζ = daha iyi kataliz?</strong> Hayır. Substrat adsorpsiyonu olumsuz etkilenebilir.</li>
+<li><strong>En büyük kₐₚₚ = en iyi katalizör?</strong> Yalnızca tüm koşullar aynıysa.</li>
+<li><strong>DHLA bloke ediyorsa neden kullanılıyor?</strong> Kaplamasız → hemen agregasyon. Optimum kaplama gerekli.</li>
+</ul>`},
+
+{id:'yesil',k:['yeşil kimya','sürdürülebilir','çevre dostu','yeşil kataliz','ekotoksisite'],c:'GENEL',
+a:`<h4>Yeşil Kimya Perspektifi</h4>
+<ul>
+<li>Ag → Au/Pt'den daha ekonomik | DHLA → biyokökenli ligand | Sulu ortam → organik çözücü yok</li>
+<li>Endişe: NaBH₄ borlu atık | AgNP ekotoksisite | Geri kazanım zorluğu</li>
+</ul>
+<h4>İyileştirme</h4>
+<ul>
+<li>NaBH₄ → H₂ veya elektrokimyasal | Destekli sistem → tekrar kullanım | Metal yükü azalt</li>
+</ul>`},
+
+{id:'genel_kimya',k:['kataliz nedir','katalizör nedir','termodinamik','gibbs','aktivasyon enerjisi','redoks','oksidasyon indirgeme'],c:'GENEL',
+a:`<h4>Temel Kimya</h4>
+<div class="fb">Katalizör: reaksiyon hızını artıran, tüketilmeyen madde
+Arrhenius: k = A·exp(−Eₐ/RT)
+Beer-Lambert: A = ε·c·l
+ΔG = ΔH − T·ΔS  →  ΔG<0 spontan
+Oksidasyon: e⁻ kaybı | İndirgeme: e⁻ kazanımı
+p-NP'de N: +3 (NO₂) → −3 (NH₂) = 6e⁻ değişimi</div>`},
+];
+
+// ────────────────────────────────────────────────────────────────────────
+//  NORMALIZASYON FONKSİYONU
+// ────────────────────────────────────────────────────────────────────────
+function norm(raw) {
+  let t = raw.toLowerCase().trim();
+  // Uzun eşleşmeleri önce uygula (daha kısa olanlar sonra)
+  const sorted = Object.entries(TERM_MAP).sort((a,b)=>b[0].length-a[0].length);
+  for (const [k,v] of sorted) {
+    if (t.includes(k)) t = t.split(k).join(v);
+  }
+  return t;
+}
+
+// ────────────────────────────────────────────────────────────────────────
+//  KURAL 3: CEVAP-İÇİ TERİM ALGILAMA
+// ────────────────────────────────────────────────────────────────────────
+const ANSWER_TERM_TRIGGERS = {
+  'nmr': 'nmr spektroskopi',
+  'sem': 'sem analiz',
+  'afm': 'afm analiz',
+  'dsc': 'dsc analiz',
+  'tga': 'tga analiz',
+  'dls': 'dls analiz',
+  'raman': 'raman spektroskopi',
+  'sers': 'raman spektroskopi',
+  'xps': 'xps analiz',
+  'hplc': 'hplc analiz',
+  'icp': 'icp analiz',
+  'gc': 'gc analiz',
+  'bet': 'bet analiz',
+  'xrd': 'xrd analiz',
+  'tem': 'tem analiz',
+  'langmuir': 'langmuir izoterm',
+};
+
+function detectAnswerTerms(answerHtml, userQuestion) {
+  const userNorm = norm(userQuestion);
+  const extras = [];
+  const seen = new Set();
+  const answerText = answerHtml.toLowerCase();
+
+  for (const [trigger, extraKey] of Object.entries(ANSWER_TERM_TRIGGERS)) {
+    // Cevap içinde geçiyor ama kullanıcı bunu sormadıysa ekle
+    if (answerText.includes(trigger) && !userNorm.includes(trigger) && !seen.has(extraKey)) {
+      if (TERM_EXTRAS[extraKey] && TERM_EXTRAS[extraKey].html) {
+        extras.push(TERM_EXTRAS[extraKey].html);
+        seen.add(extraKey);
+      }
+    }
+  }
+  return extras;
+}
+
+// ────────────────────────────────────────────────────────────────────────
+//  YANIT MOTORU
+// ────────────────────────────────────────────────────────────────────────
+function findAnswer(raw) {
+  const t = norm(raw);
+
+  // 1. Tam anahtar kelime eşleşmesi (uzun eşleşme öncelikli)
+  let best = null, bestScore = 0;
+  for (const e of KB) {
+    let s = 0;
+    for (const kw of e.k) {
+      if (t.includes(kw)) s += kw.length * 3;
+    }
+    if (s > bestScore) { bestScore = s; best = e; }
+  }
+  if (bestScore > 0) return best;
+
+  // 2. Kelime bazlı fuzzy
+  const words = t.split(/\s+/).filter(w => w.length > 2);
+  let fb = null, fs = 0;
+  for (const e of KB) {
+    let s = 0;
+    for (const kw of e.k) {
+      for (const w of words) {
+        if (kw.includes(w)) s += w.length * 2;
+        else if (kw.startsWith(w.substring(0, Math.min(4, w.length)))) s += 2;
+      }
+    }
+    if (s > fs) { fs = s; fb = e; }
+  }
+  if (fs > 3) return fb;
+
+  // 3. Terim haritasında direkt karşılık var mı?
+  for (const [k, v] of Object.entries(TERM_EXTRAS)) {
+    if (t.includes(k) && TERM_EXTRAS[k] && TERM_EXTRAS[k].html) {
+      return { id: k, k: [k], c: 'ANALİZ', a: TERM_EXTRAS[k].html };
+    }
+  }
+
+  return null;
+}
+
+function getResponse(rawInput) {
+  const e = findAnswer(rawInput);
+  let html = '';
+  let cat = 'GENEL';
+
+  if (e) {
+    html = e.a;
+    cat = e.c;
+  } else {
+    const t = norm(rawInput);
+    if (/kimya|fizik|biyoloji|malzeme|mühendis/.test(t)) {
+      html = `<h4>Bilim Sorusu</h4><p>Sorunuzu şu terimlerle ilişkilendirirseniz çok daha detaylı yanıt verebilirim:</p><p><em>DHLA@AgNP · UV-Vis · IR/FTIR · NMR · SEM · TEM · XRD · DLS · Zeta · Raman · ICP · HPLC · kinetik · mekanizma · sentez · güvenlik</em></p>`;
+    } else {
+      html = `<p>Sorunuz alındı. Konu DHLA@AgNP sistemimiz, analitik teknikler (UV-Vis, FTIR, NMR, TEM, SEM...) veya genel kimya/bilim alanlarından biri ise detaylı yanıt verebilirim.</p><p style="font-size:.8em;color:rgba(255,255,255,.3);margin-top:.5rem">Hızlı erişim butonlarını kullanabilirsiniz ↓</p>`;
+    }
+  }
+
+  // KURAL 3: Cevap içindeki terimleri algıla → ek açıklama ekle
+  const extras = detectAnswerTerms(html, rawInput);
+  if (extras.length > 0) {
+    html += `<hr style="border:none;border-top:1px solid rgba(255,255,255,.07);margin:.8rem 0">`;
+    html += `<p style="font-size:.72rem;color:rgba(255,255,255,.35);margin-bottom:.4rem">◈ Cevabınızda geçen terimler hakkında ek bilgi:</p>`;
+    html += extras.slice(0, 2).join('<hr style="border:none;border-top:1px solid rgba(255,255,255,.05);margin:.6rem 0">');
+  }
+
+  return { html, cat };
+}
+
+// ────────────────────────────────────────────────────────────────────────
+//  LOCAL STORAGE
+// ────────────────────────────────────────────────────────────────────────
+const DBKEY = 'akalin_ai_2026_logs';
+function loadLogs() { try { return JSON.parse(localStorage.getItem(DBKEY)||'[]'); } catch { return []; } }
+function saveLog(q, a, cat) {
+  const logs = loadLogs();
+  logs.unshift({ id: Date.now(), q: q.trim(), a: a.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,300), cat, ts: new Date().toISOString() });
+  if (logs.length > 600) logs.splice(600);
+  localStorage.setItem(DBKEY, JSON.stringify(logs));
+}
+
+// ────────────────────────────────────────────────────────────────────────
+//  CHAT UI
+// ────────────────────────────────────────────────────────────────────────
+let busy = false;
+function gt() { return new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}); }
+function scrollBot() { const c=document.getElementById('chat'); c.scrollTop=c.scrollHeight; }
+
+function addMsg(role, html, cat='') {
+  const c = document.getElementById('chat');
+  const row = document.createElement('div');
+  row.className = `mrow ${role}`;
+  const catHtml = cat ? `<span class="tg">${cat}</span> ` : '';
+  if (role === 'bot') {
+    row.innerHTML = `<div class="mav">◆</div><div class="mcon"><div class="mbbl">${html}</div><div class="mtime">${catHtml}${gt()}</div></div>`;
+  } else {
+    row.innerHTML = `<div class="mcon"><div class="mbbl">${esc(html)}</div><div class="mtime">${gt()}</div></div><div class="mav">◇</div>`;
+  }
+  c.appendChild(row); scrollBot(); return row;
+}
+
+function showTyping() {
+  const c = document.getElementById('chat');
+  const r = document.createElement('div');
+  r.className = 'typ-row'; r.id = 'typ';
+  r.innerHTML = `<div class="typ-av">◆</div><div class="typ-bbl"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+  c.appendChild(r); scrollBot();
+}
+function hideTyping() { const e=document.getElementById('typ'); if(e) e.remove(); }
+
+async function send() {
+  if (busy) return;
+  const inp = document.getElementById('ui');
+  const txt = inp.value.trim();
+  if (!txt) return;
+  busy = true;
+  document.getElementById('sb').disabled = true;
+  inp.value = ''; inp.style.height = 'auto';
+  addMsg('user', txt);
+  showTyping();
+  await new Promise(r => setTimeout(r, 480 + Math.random()*650));
+  hideTyping();
+  const { html, cat } = getResponse(txt);
+  const row = addMsg('bot', html, cat);
+  const bbl = row.querySelector('.mbbl');
+  if (bbl) { bbl.style.opacity='0'; bbl.style.transition='opacity .4s ease'; requestAnimationFrame(()=>{ bbl.style.opacity='1'; }); }
+  saveLog(txt, html, cat);
+  busy = false;
+  document.getElementById('sb').disabled = false;
+  inp.focus();
+}
+
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
+function hk(e) { if (e.key==='Enter'&&!e.shiftKey) { e.preventDefault(); send(); } }
+function ar(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,108)+'px'; }
+function cc(t) { document.getElementById('ui').value=t; send(); }
+
+function clearChat() {
+  if (!confirm('Sohbet geçmişi silinsin mi?')) return;
+  document.getElementById('chat').innerHTML = '';
+  welcome();
+}
+
+function welcome() {
+  addMsg('bot',
+    `◆ <strong>Akalın AI 2026'ya Hoşgeldiniz.</strong><br>
+Geliştirici: <strong>AkalınSoft</strong> · Neural Intelligence · Istanbul<br><br>
+<strong>Ne yapabilirim?</strong><br>
+◈ Eksik/kısaltılmış terim tamamlama: <em>uv → UV-Vis, ir → FTIR, nmr → NMR, sem → SEM...</em><br>
+◈ İngilizce/Türkçe terim eşleştirme: <em>reaction, adsorption, catalysis, langmuir...</em><br>
+◈ Cevabımdaki terimleri algılayıp ek açıklama yapma<br>
+◈ DHLA@AgNP sistemi + geniş bilim kapsamı<br><br>
+Sorunuzu yazın.`, 'DHLA');
+}
+
+// ────────────────────────────────────────────────────────────────────────
+//  ADMIN PANELİ
+// ────────────────────────────────────────────────────────────────────────
+function openAdmin() { renderAdmin(); document.getElementById('aov').classList.add('open'); }
+function closeAdmin() { document.getElementById('aov').classList.remove('open'); }
+
+function renderAdmin() {
+  const logs = loadLogs();
+  const search = (document.getElementById('aps')?.value||'').toLowerCase();
+  const cat = document.getElementById('apc')?.value||'';
+  const filtered = logs.filter(l => {
+    const ms = !search||l.q.toLowerCase().includes(search)||l.a.toLowerCase().includes(search);
+    const mc = !cat||l.cat===cat;
+    return ms && mc;
+  });
+  const cats = {};
+  logs.forEach(l => { cats[l.cat]=(cats[l.cat]||0)+1; });
+  document.getElementById('apst').innerHTML =
+    `<span>Toplam: <strong>${logs.length}</strong></span>
+     <span>Gösterilen: <strong>${filtered.length}</strong></span>
+     ${Object.entries(cats).map(([k,v])=>`<span>${k}: <strong>${v}</strong></span>`).join('')}`;
+  const body = document.getElementById('apbd');
+  if (!filtered.length) { body.innerHTML=`<div class="aempty">📭 Kayıt bulunamadı.</div>`; return; }
+  body.innerHTML = filtered.map(l => {
+    const d = new Date(l.id).toLocaleString('tr-TR');
+    return `<div class="lc">
+      <div class="lm"><span class="lid">#${l.id}</span><span class="lt">🕐 ${d}</span><span class="tg">${l.cat||'?'}</span></div>
+      <div class="lq">${esc(l.q)}</div>
+      <div class="la">${esc(l.a)}</div>
+    </div>`;
+  }).join('');
+}
+
+function clearLogs() {
+  if (!confirm('Tüm kayıtlar silinsin mi?')) return;
+  localStorage.removeItem(DBKEY); renderAdmin();
+}
+
+function exportCSV() {
+  const logs = loadLogs();
+  if (!logs.length) { alert('Kayıt yok.'); return; }
+  const hdr = 'ID,Kategori,Tarih,Soru,Cevap';
+  const rows = logs.map(l => {
+    const q = `"${l.q.replace(/"/g,'""')}"`;
+    const a = `"${l.a.replace(/"/g,'""')}"`;
+    return `${l.id},${l.cat},${new Date(l.id).toLocaleString('tr-TR')},${q},${a}`;
+  });
+  const csv = [hdr,...rows].join('\n');
+  const blob = new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url;
+  a.download=`akalin_ai_2026_${Date.now()}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+// ────────────────────────────────────────────────────────────────────────
+//  INIT
+// ────────────────────────────────────────────────────────────────────────
+function toggleMute() {
+  const audio = document.getElementById('bg-audio');
+  const btn = document.getElementById('mute-btn');
+  if (!audio) return;
+  if (audio.muted || audio.paused) {
+    audio.muted = false;
+    audio.play().catch(()=>{});
+    if (btn) { btn.textContent = '♪ Müzik'; btn.style.color = ''; }
+  } else {
+    audio.muted = true;
+    if (btn) { btn.textContent = '♪ Sessiz'; btn.style.color = 'rgba(255,255,255,0.25)'; }
+  }
+}
+
+function playBgMusic() {
+  const audio = document.getElementById('bg-audio');
+  if (!audio) return;
+  audio.volume = 0;
+  audio.play().then(() => {
+    // Fade-in: 0 → 1 in 2 seconds
+    let vol = 0;
+    const fade = setInterval(() => {
+      vol = Math.min(vol + 0.04, 1);
+      audio.volume = vol;
+      if (vol >= 1) clearInterval(fade);
+    }, 80);
+  }).catch(() => {});
+}
+
+function enterApp() {
+  document.getElementById('splash').classList.add('out');
+  playBgMusic();
+  document.getElementById('app').classList.add('on');
+  welcome();
+  setTimeout(() => {
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('ui').focus();
+  }, 1000);
+}
+setTimeout(() => { if (!document.getElementById('app').classList.contains('on')) enterApp(); }, 5000);
+document.getElementById('aov').addEventListener('click', function(e) { if (e.target===this) closeAdmin(); });
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
